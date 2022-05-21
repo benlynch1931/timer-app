@@ -1,0 +1,10 @@
+package com.ar.config;
+
+public class ItemSize {
+
+    public static final int SCREEN_WIDTH = 414;
+    public static final int TABLE_MARGIN = 5;
+    public static final int TABLE_WIDTH = SCREEN_WIDTH - (2*TABLE_MARGIN);
+    public static final int COL_PRESET_WIDTH = 210;
+    public static final int COL_OTHER_WIDTH = (TABLE_WIDTH - COL_PRESET_WIDTH) / 2;
+}

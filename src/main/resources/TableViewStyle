@@ -1,0 +1,24 @@
+.table-view {
+    -fx-border-color: #FFFFFF;
+    -fx-background-color: #FFFFFF;
+}
+
+.table-row-cell {
+    -fx-box-sizing: border-box;
+}
+
+.table-row-cell:empty {
+    -fx-background-color: #FFFFFF;
+}
+
+.table-row-cell:empty .table-cell {
+    -fx-border-width: 0px;
+}
+
+.button {
+    -fx-margin: 5px;
+}
+
+.root {
+    -fx-background-color: #FFFFFF;
+}
