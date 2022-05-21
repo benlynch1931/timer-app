@@ -6,6 +6,9 @@ This is a mobile application designed to help with multi-tasking, but generating
 
 The original use-case for this application was for cooking.
 
+**NOTE: This application will NOT run for you, you will be missing an application.properties file. It is not included as it contains sensitive information I am using for development.
+My aim is to use a built-in database, but until then the file will be missing**
+
 
 ## How it Works
 
