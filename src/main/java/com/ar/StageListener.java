@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 
+/**
+ * @author Ben Lynch
+ */
 @Component
 public class StageListener implements ApplicationListener<StageReadyEvent> {
 

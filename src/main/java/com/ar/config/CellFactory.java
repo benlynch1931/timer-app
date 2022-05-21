@@ -8,6 +8,9 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
 
+/**
+ * @author Ben Lynch
+ */
 public class CellFactory {
 
     public static Callback<TableColumn<PresetDto, String>, TableCell<PresetDto, String>> presetButton(PresetService presetService) {

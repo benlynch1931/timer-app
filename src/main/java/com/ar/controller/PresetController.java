@@ -13,6 +13,9 @@ import javafx.util.Callback;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author Ben Lynch
+ */
 @Component
 @RequiredArgsConstructor
 public class PresetController {

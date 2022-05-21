@@ -1,5 +1,8 @@
 package com.ar.config;
 
+/**
+ * @author Ben Lynch
+ */
 public class TimeValues {
 
     public static int THIRTY_MINS = 1800;

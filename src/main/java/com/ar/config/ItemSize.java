@@ -1,5 +1,8 @@
 package com.ar.config;
 
+/**
+ * @author Ben Lynch
+ */
 public class ItemSize {
 
     public static final int SCREEN_WIDTH = 414;

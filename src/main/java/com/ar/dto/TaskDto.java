@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigInteger;
 
+/**
+ * @author Ben Lynch
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

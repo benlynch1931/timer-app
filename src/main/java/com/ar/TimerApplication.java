@@ -11,6 +11,9 @@ import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
 
+/**
+ * @author Ben Lynch
+ */
 public class TimerApplication extends Application {
 
     private ConfigurableApplicationContext context;
@@ -41,6 +44,9 @@ public class TimerApplication extends Application {
     }
 }
 
+/**
+ * @author Ben Lynch
+ */
 class StageReadyEvent extends ApplicationEvent {
 
     public Stage getStage() {

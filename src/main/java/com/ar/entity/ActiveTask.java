@@ -9,6 +9,9 @@ import javax.persistence.*;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 
+/**
+ * @author Ben Lynch
+ */
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

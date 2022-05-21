@@ -10,6 +10,9 @@ import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.List;
 
+/**
+ * @author Ben Lynch
+ */
 @Entity
 @Table(name = DatabaseConstants.TABLE_PRESET)
 @AllArgsConstructor

@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigInteger;
 
+/**
+ * @author Ben Lynch
+ */
 @Repository
 public interface PresetRepo extends JpaRepository<Preset, BigInteger> {
 }
