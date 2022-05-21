@@ -28,7 +28,6 @@ import java.util.TimerTask;
 @Component
 public class PresetService {
     // TODO: Stop preset -> clear active timers
-    // TODO: When task alarm -> remove record from ActiveTasks
 
     private final PresetRepo presetRepo;
 
@@ -43,14 +42,7 @@ public class PresetService {
         this.presetRepo = presetRepo;
         this.activeTaskRepo = activeTaskRepo;
         this.applicationContext = applicationContext;
-//        presetRepo.save(savePreset());
         this.presetList = formatList(this.presetRepo.findAll());
-    }
-
-    private Preset savePreset() {
-        List<Task> taskList = new ArrayList<>();
-        taskList.add(new Task(BigInteger.ONE, "50 Second Task", BigInteger.valueOf(50)));
-        return new Preset(BigInteger.ONE, "60 Sec Preset", BigInteger.valueOf(60), taskList);
     }
 
     /**
@@ -77,6 +69,11 @@ public class PresetService {
             System.out.println("ERROR");
         }
     }
+
+    public void cancelActiveTaskTimers(PresetDto preset) {
+        presetRepo.deleteByPresetId(preset.getId());
+    }
+
 
     /**
      * Scheduled task to check preset task's status

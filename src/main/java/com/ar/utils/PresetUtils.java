@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author Ben Lynch
@@ -19,8 +18,8 @@ public class PresetUtils {
 
     /**
      * This method generates a timestamp based on duration for when the preset would be ready by - if started right now
-     * @param duration
-     * @return
+     * @param duration duration of preset, in seconds
+     * @return Time preset will be ready by
      */
     public static LocalDateTime readyBy(BigInteger duration) {
          return LocalDateTime.now().plus(duration.longValue(), ChronoUnit.SECONDS);
@@ -51,7 +50,7 @@ public class PresetUtils {
     }
 
     public static void startAlarm(String taskName) {
-        System.out.println("Alarm ringing");
+        System.out.println(taskName + "Alarm ringing");
     }
 
 }
