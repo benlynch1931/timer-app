@@ -3,7 +3,6 @@ package com.ar.service;
 import com.ar.config.UpdateType;
 import com.ar.dto.PresetDto;
 import com.ar.entity.Preset;
-import com.ar.entity.Task;
 import com.ar.mapper.PresetMapper;
 import com.ar.repository.ActiveTaskRepo;
 import com.ar.repository.PresetRepo;
@@ -16,8 +15,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;

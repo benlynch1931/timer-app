@@ -1,13 +1,10 @@
 package com.ar.utils;
 
-import com.ar.config.CellFactory;
 import com.ar.config.ItemSize;
 import com.ar.dto.PresetDto;
 import com.ar.service.PresetService;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
-
-import java.util.function.Consumer;
 
 /**
  * @author Ben Lynch

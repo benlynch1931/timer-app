@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigInteger;
-import java.util.List;
 
 /**
  * @author Ben Lynch

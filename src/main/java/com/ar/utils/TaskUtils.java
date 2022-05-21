@@ -4,9 +4,7 @@ import com.ar.dto.PresetDto;
 import com.ar.dto.TaskDto;
 import com.ar.entity.ActiveTask;
 import com.ar.repository.ActiveTaskRepo;
-import javafx.scene.control.Alert;
 
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;

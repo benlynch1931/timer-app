@@ -1,7 +1,6 @@
 package com.ar.entity;
 
 import com.ar.config.DatabaseConstants;
-import com.ar.utils.PresetUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

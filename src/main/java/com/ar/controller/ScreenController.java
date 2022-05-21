@@ -1,14 +1,7 @@
 package com.ar.controller;
 
-import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.stereotype.Component;
-
-import java.util.HashMap;
 
 /**
  * @author Ben Lynch
