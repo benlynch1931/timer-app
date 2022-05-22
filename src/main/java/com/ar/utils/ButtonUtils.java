@@ -1,6 +1,7 @@
 package com.ar.utils;
 
 import com.ar.config.ItemSize;
+import com.ar.controller.ScreenController;
 import com.ar.dto.PresetDto;
 import com.ar.service.PresetService;
 import javafx.scene.control.Button;
@@ -14,7 +15,7 @@ public class ButtonUtils {
     private ButtonUtils() {}
 
 
-    public static Button createPresetBtn(PresetDto currentPreset, PresetService presetService) {
+    public static Button createPresetBtn(PresetDto currentPreset, ScreenController screenController, PresetService presetService) {
         final Button presetButton = new Button();
         presetButton.setMinWidth(ItemSize.COL_PRESET_WIDTH - 10);
         presetButton.setOnAction(event -> {
@@ -22,7 +23,7 @@ public class ButtonUtils {
 //                System.out.println("NEW PRESET");
                 // TODO: View Create Preset
             } else {
-//                presetService.generateTaskTimers(currentPreset);
+                screenController.switchToTaskListView(event);
                 // TODO: View tasks of Preset
             }
         });

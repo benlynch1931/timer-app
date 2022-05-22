@@ -16,12 +16,6 @@ import java.math.BigInteger;
 @Builder
 public class TaskDto {
 
-    public TaskDto(String name, BigInteger duration) {
-//        this.id = id;
-        this.name = name;
-        this.duration = duration;
-    }
-
     private BigInteger id;
 
     private String name;

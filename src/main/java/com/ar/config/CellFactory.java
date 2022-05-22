@@ -1,5 +1,6 @@
 package com.ar.config;
 
+import com.ar.controller.ScreenController;
 import com.ar.dto.PresetDto;
 import com.ar.service.PresetService;
 import com.ar.utils.ButtonUtils;
@@ -12,7 +13,7 @@ import javafx.util.Callback;
  */
 public class CellFactory {
 
-    public static Callback<TableColumn<PresetDto, String>, TableCell<PresetDto, String>> presetButton(PresetService presetService) {
+    public static Callback<TableColumn<PresetDto, String>, TableCell<PresetDto, String>> presetButton(ScreenController screenController, PresetService presetService) {
         return (TableColumn<PresetDto, String> param) -> new TableCell<>() {
 
             @Override
@@ -23,7 +24,7 @@ public class CellFactory {
                 setText(null);
                 if (!empty) {
                     PresetDto currentPreset = getTableView().getItems().get(getIndex());
-                    setGraphic(ButtonUtils.createPresetBtn(currentPreset, presetService));
+                    setGraphic(ButtonUtils.createPresetBtn(currentPreset, screenController, presetService));
                 }
             }
         };

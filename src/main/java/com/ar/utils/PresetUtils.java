@@ -25,6 +25,11 @@ public class PresetUtils {
          return LocalDateTime.now().plus(duration.longValue(), ChronoUnit.SECONDS);
     }
 
+    /**
+     * Formats LocalDateTime to an HH:mm view for the user
+     * @param timeToFormat time that needs formatting
+     * @return formatted time as String
+     */
     public static String viewFormat(LocalDateTime timeToFormat) {
         return timeToFormat.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
@@ -49,6 +54,10 @@ public class PresetUtils {
         }
     }
 
+    /**
+     * Method that starts the task's alarm
+     * @param taskName name of task
+     */
     public static void startAlarm(String taskName) {
         System.out.println(taskName + "Alarm ringing");
     }
