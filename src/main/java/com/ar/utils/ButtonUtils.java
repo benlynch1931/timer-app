@@ -19,9 +19,11 @@ public class ButtonUtils {
         presetButton.setMinWidth(ItemSize.COL_PRESET_WIDTH - 10);
         presetButton.setOnAction(event -> {
             if (currentPreset.getName().equals("New Preset")) {
-                System.out.println("NEW PRESET");
+//                System.out.println("NEW PRESET");
+                // TODO: View Create Preset
             } else {
 //                presetService.generateTaskTimers(currentPreset);
+                // TODO: View tasks of Preset
             }
         });
         presetButton.setText(currentPreset.getName());
