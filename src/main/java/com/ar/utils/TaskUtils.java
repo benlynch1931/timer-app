@@ -46,15 +46,12 @@ public class TaskUtils {
         return savedList.size() == taskList.size();
     }
 
-    /**
-     * This method generates a timestamp based on duration for when the preset would be ready by - if started right now
-     * @param duration duration of preset, in seconds
-     * @return string representing duration in HH:mm
-     */
-    public static String viewDuration(BigInteger duration) {
-        return LocalDateTime.now().plus(duration.longValue(), ChronoUnit.SECONDS).format(DateTimeFormatter.ofPattern("HH:mm"));
-    }
 
+    /**
+     * Used to convert the duration of a task, in seconds, to an HH:mm:ss String
+     * @param duration duration in seconds
+     * @return HH:mm:ss string of duration
+     */
     public static String convertSecondsToTime(BigInteger duration) {
 
         final double hoursAndMinutes = duration.doubleValue() / (double) TimeValues.TO_HOURS;

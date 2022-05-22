@@ -1,18 +1,14 @@
 package com.ar.controller;
 
-import com.ar.config.ItemSize;
+import com.ar.config.ComponentSize;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
 import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 
@@ -53,7 +49,7 @@ public class ScreenController {
             Parent root = fxmlLoader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root, ItemSize.SCREEN_WIDTH, ItemSize.SCREEN_HEIGHT);
+            Scene scene = new Scene(root, ComponentSize.SCREEN_WIDTH, ComponentSize.SCREEN_HEIGHT);
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

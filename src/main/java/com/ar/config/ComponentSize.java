@@ -3,7 +3,7 @@ package com.ar.config;
 /**
  * @author Ben Lynch
  */
-public class ItemSize {
+public class ComponentSize {
 
     public static final int SCREEN_WIDTH = 414;
     public static final int SCREEN_HEIGHT = 896;

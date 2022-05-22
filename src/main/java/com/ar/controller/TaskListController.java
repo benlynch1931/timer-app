@@ -1,11 +1,8 @@
 package com.ar.controller;
 
 import com.ar.config.CellFactory;
-import com.ar.config.ItemSize;
-import com.ar.dto.PresetDto;
+import com.ar.config.ComponentSize;
 import com.ar.dto.TaskDto;
-import com.ar.entity.CurrentRecordView;
-import com.ar.repository.CurrentRecordViewRepo;
 import com.ar.service.CurrentRecordViewService;
 import com.ar.service.PresetService;
 import com.ar.service.TaskService;
@@ -14,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
-import javafx.util.Callback;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -49,14 +45,14 @@ public class TaskListController {
     private final CellFactory cellFactory;
 
     public void generatePresetList() {
-        table.setTranslateX(ItemSize.TABLE_MARGIN);
-        table.setMaxWidth(ItemSize.TABLE_WIDTH);
-        table.setMinWidth(ItemSize.TABLE_WIDTH);
+        table.setTranslateX(ComponentSize.TABLE_MARGIN);
+        table.setMaxWidth(ComponentSize.TABLE_WIDTH);
+        table.setMinWidth(ComponentSize.TABLE_WIDTH);
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         final TableColumn c1 = new TableColumn("Name");
         final TableColumn c2 = new TableColumn("Duration");
-        c2.setMaxWidth(ItemSize.COL_OTHER_WIDTH);
-        c2.setMinWidth(ItemSize.COL_OTHER_WIDTH);
+        c2.setMaxWidth(ComponentSize.COL_OTHER_WIDTH);
+        c2.setMinWidth(ComponentSize.COL_OTHER_WIDTH);
 
         c1.setCellValueFactory(new PropertyValueFactory<>("name"));
         c2.setCellValueFactory(new PropertyValueFactory<>(""));

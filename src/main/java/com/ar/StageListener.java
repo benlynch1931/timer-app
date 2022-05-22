@@ -1,6 +1,6 @@
 package com.ar;
 
-import com.ar.config.ItemSize;
+import com.ar.config.ComponentSize;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -41,7 +41,7 @@ public class StageListener implements ApplicationListener<StageReadyEvent> {
             FXMLLoader fxmlLoader = new FXMLLoader(url);
             fxmlLoader.setControllerFactory(applicationContext::getBean);
             Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root, ItemSize.SCREEN_WIDTH, ItemSize.SCREEN_HEIGHT);
+            Scene scene = new Scene(root, ComponentSize.SCREEN_WIDTH, ComponentSize.SCREEN_HEIGHT);
             scene.setFill(Color.web("#E3E3E3"));
             scene.getStylesheets().addAll("TableViewStyle");
             stage.setScene(scene);
