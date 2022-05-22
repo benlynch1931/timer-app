@@ -37,7 +37,7 @@ public class PresetController {
 
     private final PresetService presetService;
 
-    private final ScreenController screenController;
+    private final CellFactory cellFactory;
 
     public void generatePresetList() {
         table.setTranslateX(ItemSize.TABLE_MARGIN);
@@ -57,8 +57,8 @@ public class PresetController {
         c3.setCellValueFactory(new PropertyValueFactory<>(""));
 
 
-        c1.setCellFactory(CellFactory.presetButton(screenController, presetService));
-        c3.setCellFactory(CellFactory.startButton(presetService));
+        c1.setCellFactory(cellFactory.presetButton());
+        c3.setCellFactory(cellFactory.startButton());
 
         table.getColumns().addAll(c1, c2, c3);
         table.setItems(presetService.getPresetList());

@@ -1,11 +1,14 @@
 package com.ar.utils;
 
+import com.ar.config.TimeValues;
 import com.ar.dto.PresetDto;
 import com.ar.dto.TaskDto;
 import com.ar.entity.ActiveTask;
 import com.ar.repository.ActiveTaskRepo;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,4 +45,36 @@ public class TaskUtils {
         });
         return savedList.size() == taskList.size();
     }
+
+    /**
+     * This method generates a timestamp based on duration for when the preset would be ready by - if started right now
+     * @param duration duration of preset, in seconds
+     * @return string representing duration in HH:mm
+     */
+    public static String viewDuration(BigInteger duration) {
+        return LocalDateTime.now().plus(duration.longValue(), ChronoUnit.SECONDS).format(DateTimeFormatter.ofPattern("HH:mm"));
+    }
+
+    public static String convertSecondsToTime(BigInteger duration) {
+
+        final double hoursAndMinutes = duration.doubleValue() / (double) TimeValues.TO_HOURS;
+        double hoursAsDouble = Math.floor(hoursAndMinutes);
+
+        final double minutesAndSeconds = (hoursAndMinutes - hoursAsDouble) * TimeValues.TO_MINUTES;
+        double minutesAsDouble = Math.floor(minutesAndSeconds);
+
+        double secondsAsDouble = (minutesAndSeconds - minutesAsDouble) * TimeValues.TO_SECONDS;
+
+        final int hours = (int) hoursAsDouble;
+        final int minutes = (int) minutesAsDouble;
+        final int seconds = (int) Math.round(secondsAsDouble);
+
+        final String hoursAsString = hours < 10 ? "0" + hours : String.valueOf(hours);
+        final String minutesAsString = minutes < 10 ? "0" + minutes : String.valueOf(minutes);
+        final String secondsAsString = seconds < 10 ? "0" + seconds : String.valueOf(seconds);
+
+        return hoursAsString.concat(":").concat(minutesAsString).concat(":").concat(secondsAsString);
+
+    }
+
 }

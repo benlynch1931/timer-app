@@ -34,4 +34,7 @@ public class Task {
 
     @Column(name = DatabaseConstants.COLUMN_DURATION)
     private BigInteger duration;
+
+    @Column(name = DatabaseConstants.COLUMN_PRESET_ID)
+    private BigInteger presetId;
 }

@@ -2,19 +2,32 @@ package com.ar.config;
 
 import com.ar.controller.ScreenController;
 import com.ar.dto.PresetDto;
+import com.ar.dto.TaskDto;
+import com.ar.service.CurrentRecordViewService;
 import com.ar.service.PresetService;
+import com.ar.service.TaskService;
 import com.ar.utils.ButtonUtils;
+import com.ar.utils.TaskUtils;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Ben Lynch
  */
+@Component
+@AllArgsConstructor
 public class CellFactory {
 
-    public static Callback<TableColumn<PresetDto, String>, TableCell<PresetDto, String>> presetButton(ScreenController screenController, PresetService presetService) {
-        return (TableColumn<PresetDto, String> param) -> new TableCell<>() {
+    private final ScreenController screenController;
+    private final CurrentRecordViewService currentRecordViewService;
+    private final PresetService presetService;
+    private final TaskService taskService;
+
+    public Callback<TableColumn<PresetDto, String>, TableCell<PresetDto, String>> presetButton(){
+        return (final TableColumn<PresetDto, String> param) -> new TableCell<>() {
 
             @Override
             public void updateItem(String item, boolean empty) {
@@ -24,7 +37,7 @@ public class CellFactory {
                 setText(null);
                 if (!empty) {
                     PresetDto currentPreset = getTableView().getItems().get(getIndex());
-                    setGraphic(ButtonUtils.createPresetBtn(currentPreset, screenController, presetService));
+                    setGraphic(ButtonUtils.createPresetBtn(currentPreset, screenController, currentRecordViewService));
                 }
             }
         };
@@ -32,11 +45,10 @@ public class CellFactory {
 
     /**
      * Updated current cell with a button for starting or cancelling a preset
-     * @param presetService PresetService to perform operations
-     * @return returns function that updates the cell value
+     * @return returns lambda function that updates the cell value
      */
-    public static Callback<TableColumn<PresetDto, String>, TableCell<PresetDto, String>> startButton(PresetService presetService) {
-        return (TableColumn<PresetDto, String> param) -> new TableCell<>() {
+    public Callback<TableColumn<PresetDto, String>, TableCell<PresetDto, String>> startButton(){
+        return (final TableColumn<PresetDto, String> param) -> new TableCell<>() {
 
             @Override
             public void updateItem(String item, boolean empty) {
@@ -46,6 +58,36 @@ public class CellFactory {
                 if (!empty && !getTableView().getItems().get(getIndex()).getName().equals("New Preset")) {
                     PresetDto currentPreset = getTableView().getItems().get(getIndex());
                     setGraphic(ButtonUtils.createStartButton(currentPreset, presetService,  this));
+                }
+            }
+        };
+    }
+
+    public Callback<TableColumn<PresetDto, String>, TableCell<TaskDto, String>> taskButton(){
+        return (final TableColumn<PresetDto, String> param) -> new TableCell<>() {
+
+            @Override
+            public void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                setGraphic(null);
+                setText(null);
+                if (!empty && !getTableView().getItems().get(getIndex()).getName().equals("New Task")) {
+                    TaskDto currentTask = getTableView().getItems().get(getIndex());
+                    setGraphic(ButtonUtils.createTaskBtn(currentTask,  screenController, currentRecordViewService));
+                }
+            }
+        };
+    }
+
+    public Callback<TableColumn<PresetDto, String>, TableCell<TaskDto, String>> durationText(){
+        return (final TableColumn<PresetDto, String> param) -> new TableCell<>() {
+
+            @Override
+            public void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (!empty && !getTableView().getItems().get(getIndex()).getName().equals("New Task")) {
+                    String newText = TaskUtils.convertSecondsToTime(getTableView().getItems().get(getIndex()).getDuration());
+                    setText(newText);
                 }
             }
         };

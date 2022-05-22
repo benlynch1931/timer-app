@@ -3,6 +3,8 @@ package com.ar.utils;
 import com.ar.config.ItemSize;
 import com.ar.controller.ScreenController;
 import com.ar.dto.PresetDto;
+import com.ar.dto.TaskDto;
+import com.ar.service.CurrentRecordViewService;
 import com.ar.service.PresetService;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
@@ -15,20 +17,35 @@ public class ButtonUtils {
     private ButtonUtils() {}
 
 
-    public static Button createPresetBtn(PresetDto currentPreset, ScreenController screenController, PresetService presetService) {
+    public static Button createPresetBtn(final PresetDto currentPreset, final ScreenController screenController, final CurrentRecordViewService currentRecordViewService) {
         final Button presetButton = new Button();
         presetButton.setMinWidth(ItemSize.COL_PRESET_WIDTH - 10);
         presetButton.setOnAction(event -> {
             if (currentPreset.getName().equals("New Preset")) {
-//                System.out.println("NEW PRESET");
                 // TODO: View Create Preset
             } else {
+                final boolean updatedRecord = currentRecordViewService.updateRecord("TASKLIST", currentPreset.getId());
                 screenController.switchToTaskListView(event);
                 // TODO: View tasks of Preset
             }
         });
         presetButton.setText(currentPreset.getName());
         return presetButton;
+    }
+
+    public static Button createTaskBtn(final TaskDto currentTask, final ScreenController screenController, final CurrentRecordViewService currentRecordViewService) {
+        final Button taskButton = new Button();
+        taskButton.setMinWidth(ItemSize.COL_PRESET_WIDTH - 10);
+        taskButton.setOnAction(event -> {
+            if (currentTask.getName().equals("New Task")) {
+                // TODO: View Create Task
+            } else {
+                screenController.switchToTaskView(event);
+                // TODO: View Task
+            }
+        });
+        taskButton.setText(currentTask.getName());
+        return taskButton;
     }
 
     /**
@@ -38,7 +55,7 @@ public class ButtonUtils {
      * @param tableCell TableCell to update graphic of cell
      * @return Start button
      */
-    public static Button createStartButton(PresetDto currentPreset, PresetService presetService, TableCell<PresetDto, String> tableCell){
+    public static Button createStartButton(final PresetDto currentPreset, final PresetService presetService, final TableCell<PresetDto, String> tableCell){
         final Button startButton = new Button("Start");
         startButton.setMinWidth(ItemSize.COL_OTHER_WIDTH - 5);
         startButton.setOnAction(event -> {

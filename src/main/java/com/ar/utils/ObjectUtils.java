@@ -17,9 +17,9 @@ public class ObjectUtils {
      * @param objects one or more objects to null-check
      * @return if any objects passed are null
      */
-    public static boolean isNull(Object... objects) {
+    public static boolean isNull(final Object... objects) {
         boolean isNull = false;
-        for (Object obj : objects) {
+        for (final Object obj : objects) {
             if (obj == null) {
                 isNull = true;
                 break;
@@ -33,7 +33,7 @@ public class ObjectUtils {
      * @param objects one or more objects to null-check
      * @return if any objects passed are NOT null
      */
-    public static boolean isNotNull(Object... objects) {
+    public static boolean isNotNull(final Object... objects) {
         return !isNull(objects);
     }
 }

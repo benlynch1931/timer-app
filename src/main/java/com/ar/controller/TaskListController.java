@@ -1,7 +1,14 @@
 package com.ar.controller;
 
+import com.ar.config.CellFactory;
+import com.ar.config.ItemSize;
 import com.ar.dto.PresetDto;
+import com.ar.dto.TaskDto;
+import com.ar.entity.CurrentRecordView;
+import com.ar.repository.CurrentRecordViewRepo;
+import com.ar.service.CurrentRecordViewService;
 import com.ar.service.PresetService;
+import com.ar.service.TaskService;
 import javafx.application.HostServices;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -11,6 +18,8 @@ import javafx.util.Callback;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.math.BigInteger;
+
 /**
  * @author Ben Lynch
  */
@@ -19,7 +28,7 @@ import org.springframework.stereotype.Component;
 public class TaskListController {
 
     @FXML
-    private TableView<PresetDto> table = new TableView<>();
+    private TableView<TaskDto> table = new TableView<>();
 
     @FXML
     private Label label;
@@ -29,43 +38,41 @@ public class TaskListController {
     @FXML
     private VBox vbox;
 
+    private BigInteger presetId;
+
     private final HostServices hostServices;
 
     private final PresetService presetService;
-
-
-    private static final int SCREEN_WIDTH = 414;
-    private static final int TABLE_MARGIN = 5;
-    private static final int TABLE_WIDTH = SCREEN_WIDTH - (2*TABLE_MARGIN);
-    private static final int COL_PRESET_WIDTH = 210;
-    private static final int COL_OTHER_WIDTH = (TABLE_WIDTH - COL_PRESET_WIDTH) / 2;
+    private final TaskService taskService;
+    private final CurrentRecordViewService currentRecordViewService;
+    
+    private final CellFactory cellFactory;
 
     public void generatePresetList() {
-        table.setTranslateX(TABLE_MARGIN);
-        table.setMaxWidth(TABLE_WIDTH);
-        table.setMinWidth(TABLE_WIDTH);
+        table.setTranslateX(ItemSize.TABLE_MARGIN);
+        table.setMaxWidth(ItemSize.TABLE_WIDTH);
+        table.setMinWidth(ItemSize.TABLE_WIDTH);
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        TableColumn c1 = new TableColumn("Name");
-        TableColumn c2 = new TableColumn("Ready At");
-        TableColumn c3 = new TableColumn(""); // Start
-        c2.setMaxWidth(COL_OTHER_WIDTH);
-        c2.setMinWidth(COL_OTHER_WIDTH);
-        c3.setMaxWidth(COL_OTHER_WIDTH);
-        c3.setMinWidth(COL_OTHER_WIDTH);
+        final TableColumn c1 = new TableColumn("Name");
+        final TableColumn c2 = new TableColumn("Duration");
+        c2.setMaxWidth(ItemSize.COL_OTHER_WIDTH);
+        c2.setMinWidth(ItemSize.COL_OTHER_WIDTH);
 
         c1.setCellValueFactory(new PropertyValueFactory<>("name"));
-        c2.setCellValueFactory(new PropertyValueFactory<>("readyAt"));
-        c3.setCellValueFactory(new PropertyValueFactory<>(""));
+        c2.setCellValueFactory(new PropertyValueFactory<>(""));
 
 
-        table.getColumns().addAll(c1, c2, c3);
+        c1.setCellFactory(cellFactory.taskButton());
+        c2.setCellFactory(cellFactory.durationText());
 
-        table.setItems(presetService.getPresetList());
+        table.getColumns().addAll(c1, c2);
+        table.setItems(taskService.getTaskList(presetId));
     }
 
     @FXML
     public void initialize() {
         label.setText("Task List View");
+        presetId = currentRecordViewService.getTaskListRecordId();
         this.button.setOnAction(actionEvent -> this.label.setText(this.hostServices.getDocumentBase()));
         generatePresetList();
     }

@@ -10,5 +10,6 @@ public class TimeValues {
     public static int FORTY_FIVE_MINS = 2700;
 
     public static int TO_MINUTES = 60;
+    public static int TO_SECONDS = 60;
     public static int TO_HOURS = 3600;
 }

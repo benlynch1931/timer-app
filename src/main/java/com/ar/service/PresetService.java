@@ -43,7 +43,7 @@ public class PresetService {
     }
 
     /**
-     * Formates list to be compatible with JavaFX
+     * Formats list to be compatible with JavaFX
      * @param presetList list to format
      * @return JavaFx compatible list
      */
