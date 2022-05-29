@@ -46,4 +46,8 @@ public class CurrentRecordViewService {
     public BigInteger getTaskListRecordId() {
         return currentRecordViewRepo.getRecordIdByScene("TASKLIST");
     }
+
+    public BigInteger getTaskRecordId() {
+        return currentRecordViewRepo.getRecordIdByScene("TASK");
+    }
 }

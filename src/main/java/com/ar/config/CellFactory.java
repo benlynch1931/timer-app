@@ -37,7 +37,7 @@ public class CellFactory {
                 setText(null);
                 if (!empty) {
                     PresetDto currentPreset = getTableView().getItems().get(getIndex());
-                    setGraphic(ButtonUtils.createPresetBtn(currentPreset, screenController, currentRecordViewService));
+                    setGraphic(ButtonUtils.generateTaskListViewButton(currentPreset, screenController, currentRecordViewService));
                 }
             }
         };
@@ -57,7 +57,7 @@ public class CellFactory {
                 setText(null);
                 if (!empty && !getTableView().getItems().get(getIndex()).getName().equals("New Preset")) {
                     PresetDto currentPreset = getTableView().getItems().get(getIndex());
-                    setGraphic(ButtonUtils.createStartButton(currentPreset, presetService,  this));
+                    setGraphic(ButtonUtils.generateStartPresetButton(currentPreset, presetService,  this));
                 }
             }
         };
@@ -73,7 +73,7 @@ public class CellFactory {
                 setText(null);
                 if (!empty && !getTableView().getItems().get(getIndex()).getName().equals("New Task")) {
                     TaskDto currentTask = getTableView().getItems().get(getIndex());
-                    setGraphic(ButtonUtils.createTaskBtn(currentTask,  screenController, currentRecordViewService));
+                    setGraphic(ButtonUtils.generateTaskViewButton(currentTask,  screenController, currentRecordViewService));
                 }
             }
         };

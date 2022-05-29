@@ -17,7 +17,14 @@ public class ButtonUtils {
     private ButtonUtils() {}
 
 
-    public static Button createPresetBtn(final PresetDto currentPreset, final ScreenController screenController, final CurrentRecordViewService currentRecordViewService) {
+    /**
+     * Creates button to switch view to task list of specific Preset
+     * @param currentPreset Info of specific preset
+     * @param screenController controls screen switching
+     * @param currentRecordViewService service to set task info for the view
+     * @return button
+     */
+    public static Button generateTaskListViewButton(final PresetDto currentPreset, final ScreenController screenController, final CurrentRecordViewService currentRecordViewService) {
         final Button presetButton = new Button();
         presetButton.setMinWidth(ComponentSize.COL_PRESET_WIDTH - 10);
         presetButton.setOnAction(event -> {
@@ -33,13 +40,21 @@ public class ButtonUtils {
         return presetButton;
     }
 
-    public static Button createTaskBtn(final TaskDto currentTask, final ScreenController screenController, final CurrentRecordViewService currentRecordViewService) {
+    /**
+     * Creates button to switch view to specific Task
+     * @param currentTask Info of specific task
+     * @param screenController controls screen switching
+     * @param currentRecordViewService service to set task info for the view
+     * @return button
+     */
+    public static Button generateTaskViewButton(final TaskDto currentTask, final ScreenController screenController, final CurrentRecordViewService currentRecordViewService) {
         final Button taskButton = new Button();
         taskButton.setMinWidth(ComponentSize.COL_PRESET_WIDTH - 10);
         taskButton.setOnAction(event -> {
             if (currentTask.getName().equals("New Task")) {
                 // TODO: View Create Task
             } else {
+                final boolean updatedRecord = currentRecordViewService.updateRecord("TASK", currentTask.getId());
                 screenController.switchToTaskView(event);
                 // TODO: View Task
             }
@@ -55,12 +70,12 @@ public class ButtonUtils {
      * @param tableCell TableCell to update graphic of cell
      * @return Start button
      */
-    public static Button createStartButton(final PresetDto currentPreset, final PresetService presetService, final TableCell<PresetDto, String> tableCell){
+    public static Button generateStartPresetButton(final PresetDto currentPreset, final PresetService presetService, final TableCell<PresetDto, String> tableCell){
         final Button startButton = new Button("Start");
         startButton.setMinWidth(ComponentSize.COL_OTHER_WIDTH - 5);
         startButton.setOnAction(event -> {
             presetService.generateTaskTimers(currentPreset);
-            tableCell.setGraphic(createCancelButton(currentPreset, presetService, tableCell));
+            tableCell.setGraphic(generateCancelPresetButton(currentPreset, presetService, tableCell));
         });
         return startButton;
     }
@@ -72,12 +87,12 @@ public class ButtonUtils {
      * @param tableCell TableCell to update graphic of cell
      * @return Cancel button
      */
-    public static Button createCancelButton(PresetDto currentPreset, PresetService presetService, TableCell<PresetDto, String> tableCell) {
+    public static Button generateCancelPresetButton(PresetDto currentPreset, PresetService presetService, TableCell<PresetDto, String> tableCell) {
         final Button cancelButton = new Button("Cancel");
         cancelButton.setMinWidth(ComponentSize.COL_OTHER_WIDTH - 5);
         cancelButton.setOnAction(event -> {
             presetService.cancelActiveTaskTimers(currentPreset);
-            tableCell.setGraphic(createStartButton(currentPreset, presetService, tableCell));
+            tableCell.setGraphic(generateStartPresetButton(currentPreset, presetService, tableCell));
         });
         return cancelButton;
     }
