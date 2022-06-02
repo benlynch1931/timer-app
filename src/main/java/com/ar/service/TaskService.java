@@ -55,4 +55,8 @@ public class TaskService {
         return formatList(taskRepo.getByPresetId(presetId));
     }
 
+    public void saveOrUpdateTask(TaskDto task) {
+        taskRepo.save(TaskMapper.mapToEntity(task));
+    }
+
 }

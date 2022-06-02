@@ -22,3 +22,7 @@
 .root {
     -fx-background-color: #FFFFFF;
 }
+
+.text-area {
+    -fx-translate-x: -50%;
+}

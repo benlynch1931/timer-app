@@ -36,4 +36,17 @@ public class TaskMapper {
         taskList.forEach(task -> dtoList.add(mapToDto(task)));
         return dtoList;
     }
+
+    /**
+     * Maps Task DTO to entity for save or update in database
+     * @param taskDto dto to get details from
+     * @return entity for saving
+     */
+    public static Task mapToEntity(final TaskDto taskDto) {
+        Task task = new Task();
+        task.setId(taskDto.getId());
+        task.setName(taskDto.getName());
+        task.setDuration(taskDto.getDuration());
+        return task;
+    }
 }

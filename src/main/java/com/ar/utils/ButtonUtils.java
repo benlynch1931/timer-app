@@ -33,7 +33,7 @@ public class ButtonUtils {
             } else {
                 final boolean updatedRecord = currentRecordViewService.updateRecord("TASKLIST", currentPreset.getId());
                 screenController.switchToTaskListView(event);
-                // TODO: View tasks of Preset
+
             }
         });
         presetButton.setText(currentPreset.getName());

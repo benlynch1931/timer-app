@@ -74,4 +74,16 @@ public class TaskUtils {
 
     }
 
+    /**
+     * Replaces 00 with null for Task View, so placeholder shows instead of 0
+     * @param duration Array of duration elements: hr,min,sec
+     */
+    public static void formatDurationText(final String[] duration) {
+        for(int i=0; i<duration.length; i++) {
+            if (duration[i].equals("00")) {
+                duration[i] = null;
+            }
+        }
+    }
+
 }

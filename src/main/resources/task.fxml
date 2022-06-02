@@ -2,11 +2,18 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
 <VBox xmlns="http://javafx.com/javafx/0.0.121"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.ar.controller.TaskController">
 
-        <Label fx:id="label" />
+        <Button fx:id="save" />
+        <Button fx:id="back" />
 
-        <TableView fx:id="table" />
+        <Label fx:id="label" />
+        <TextField fx:id="taskName" />
+
+        <TextField fx:id="hours" />
+        <TextField fx:id="minutes" />
+        <TextField fx:id="seconds" />
 </VBox>
