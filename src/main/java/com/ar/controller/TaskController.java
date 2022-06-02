@@ -1,28 +1,22 @@
 package com.ar.controller;
 
-import com.ar.config.CellFactory;
 import com.ar.config.ComponentSize;
 import com.ar.dto.TaskDto;
-import com.ar.entity.Task;
 import com.ar.mapper.TaskMapper;
 import com.ar.service.CurrentRecordViewService;
-import com.ar.service.PresetService;
 import com.ar.service.TaskService;
-import com.ar.utils.ComponentUtils;
 import com.ar.utils.ObjectUtils;
 import com.ar.utils.TaskUtils;
 import javafx.application.HostServices;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.math.BigInteger;
+import java.awt.*;
 
 /**
  * @author Ben Lynch
@@ -32,7 +26,14 @@ import java.math.BigInteger;
 public class TaskController {
 
     @FXML
-    private Label label;
+    private HBox buttonBox;
+    @FXML
+    private AnchorPane durationPane;
+    @FXML
+    private AnchorPane nameBox;
+
+    @FXML
+    private TextField taskName;
 
     @FXML
     private Button save;
@@ -47,10 +48,6 @@ public class TaskController {
     @FXML
     private TextField seconds;
 
-
-    @FXML
-    private TextField taskName;
-
     private TaskDto task;
 
     private final HostServices hostServices;
@@ -59,9 +56,25 @@ public class TaskController {
     private final CurrentRecordViewService currentRecordViewService;
     private final ScreenController screenController;
 
+    public void setComponentBoxes() {
+        buttonBox.setMinHeight(ComponentSize.TASK_BOX_HGT);
+        nameBox.setMinHeight(ComponentSize.TASK_BOX_HGT);
+        durationPane.setMinHeight(ComponentSize.TASK_BOX_HGT);
+        buttonBox.setMaxHeight(ComponentSize.TASK_BOX_HGT);
+        nameBox.setMaxHeight(ComponentSize.TASK_BOX_HGT);
+        durationPane.setMaxHeight(ComponentSize.TASK_BOX_HGT);
+        buttonBox.setTranslateY(ComponentSize.TASK_BUTTON_BOX_TOP);
+        nameBox.setTranslateY(ComponentSize.TASK_NAME_BOX_TRANS_Y);
+        durationPane.setTranslateY(ComponentSize.TASK_DURATION_PANE_TRANS_Y);
+
+        buttonBox.setBorder(new Border(new BorderStroke(Paint.valueOf("#000000"), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        nameBox.setBorder(new Border(new BorderStroke(Paint.valueOf("#000000"), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        durationPane.setBorder(new Border(new BorderStroke(Paint.valueOf("#000000"), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+    }
+
 
     public void setTaskInfo() {
-        taskName.setText(task.getName());
+        taskName.setPromptText("Task Name");
         hours.setPromptText("HH");
         minutes.setPromptText("MM");
         seconds.setPromptText("SS");
@@ -72,26 +85,37 @@ public class TaskController {
             minutes.setText(duration[1]);
             seconds.setText(duration[2]);
         }
+        if (ObjectUtils.isNotNull(task.getName())) {
+            taskName.setText(task.getName());
+        }
     }
 
     private void setComponentDimensions() {
+//        setNameComponentDimensions(taskName);
         setDurationComponentDimensions(hours, 0);
         setDurationComponentDimensions(minutes, 1);
         setDurationComponentDimensions(seconds, 2);
     }
 
+    public void setNameComponentDimensions(final TextField component) {
+//        component.setMaxWidth(ComponentSize.TASK_NAME_FIELD_WIDTH);
+//        component.setMinWidth(ComponentSize.TASK_NAME_FIELD_WIDTH);
+        System.out.println(component.getLayoutY());
+        System.out.println(component.getTranslateY());
+//        component.setTranslateX(ComponentSize.TASK_NAME_FIELD_MARGIN);
+    }
+
     public void setDurationComponentDimensions(final TextField component, final int fieldNo) {
         component.setMaxWidth(ComponentSize.TASK_DURATION_FIELDS);
         component.setMaxWidth(ComponentSize.TASK_DURATION_FIELDS);
-        component.setLayoutY(ComponentSize.TASK_DURATION_TOP);
-        component.setLayoutX(
-                (ComponentSize.TASK_DURATION_MARGIN)
-                + (ComponentSize.TASK_DURATION_FIELDS * fieldNo)
-                + (ComponentSize.TASK_DURATION_SPACER * fieldNo)
-        );
+
+        int xCoordinate = (ComponentSize.TASK_DURATION_MARGIN) + (ComponentSize.TASK_DURATION_FIELDS * fieldNo) + (ComponentSize.TASK_DURATION_SPACER * fieldNo);
+        component.relocate(xCoordinate, 0);
     }
 
-    private void setButtonActions() {
+    private void setButtonInfo() {
+        save.setText("SAVE");
+        back.setText("BACK");
         save.setOnAction(event -> {
             taskService.saveOrUpdateTask(task);
             screenController.switchToTaskListView(event);
@@ -103,9 +127,10 @@ public class TaskController {
     @FXML
     public void initialize() {
         task = TaskMapper.mapToDto(currentRecordViewService.getTaskRecord());
-        setButtonActions();
+        setButtonInfo();
         setComponentDimensions();
         setTaskInfo();
+        setComponentBoxes();
     }
 }
 
