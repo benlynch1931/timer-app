@@ -5,7 +5,11 @@ import com.ar.config.TimeValues;
 import com.ar.dto.PresetDto;
 import com.ar.dto.TaskDto;
 import com.ar.entity.ActiveTask;
+import com.ar.entity.Task;
+import com.ar.mapper.TaskMapper;
 import com.ar.repository.ActiveTaskRepo;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.math.BigInteger;
 import java.time.LocalDateTime;
@@ -28,6 +32,18 @@ public class TaskUtils {
             cancel();
         }
     };
+
+    /**
+     * Formats list to be compatible with JavaFX
+     * @param taskList list to format
+     * @return JavaFx compatible list
+     */
+    public static ObservableList<TaskDto> formatList(List<TaskDto> taskList) {
+        ObservableList<TaskDto> observableList = FXCollections.observableArrayList();
+        observableList.addAll(taskList);
+        observableList.add(TaskDto.builder().name("New Task").build());
+        return observableList;
+    }
 
     /**
      * Created records for the tasks that have just become active
@@ -73,6 +89,8 @@ public class TaskUtils {
         return hoursAsString.concat(":").concat(minutesAsString).concat(":").concat(secondsAsString);
 
     }
+
+
 
     /**
      * Replaces 00 with null for Task View, so placeholder shows instead of 0

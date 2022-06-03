@@ -104,4 +104,18 @@ public class ComponentUtils {
             button.relocate(0, ComponentSize.TASK_BTN_TOP);
         }
     }
+
+    /**
+     * Sets tasklistview-specific buttons width, height and coordinates
+     * @param button Button to set dimensions
+     */
+    public static void setTaskListButtonDimensions(final Button button) {
+        button.setMinWidth(ComponentSize.TASK_BTN_WIDTH);
+        button.setMaxWidth(ComponentSize.TASK_BTN_WIDTH);
+        button.setMaxHeight(ComponentSize.TASK_BTN_HEIGHT);
+        button.setMinHeight(ComponentSize.TASK_BTN_HEIGHT);
+
+        button.relocate(0, ComponentSize.TASKLIST_BTN_TOP);
+
+    }
 }

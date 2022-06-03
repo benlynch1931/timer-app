@@ -34,21 +34,11 @@ public class TaskService {
 //        this.applicationContext = applicationContext;
 //    }
 
-    /**
-     * Formats list to be compatible with JavaFX
-     * @param taskList list to format
-     * @return JavaFx compatible list
-     */
-    private ObservableList<TaskDto> formatList(List<Task> taskList) {
-        ObservableList<TaskDto> observableList = FXCollections.observableArrayList();
-        taskList.forEach(task -> observableList.add(TaskMapper.mapToDto(task)));
-        observableList.add(TaskDto.builder().name("New Task").build());
-        return observableList;
-    }
 
-    public ObservableList<TaskDto> getTaskList(BigInteger presetId) {
-        return formatList(taskRepo.getByPresetId(presetId));
-    }
+
+//    public ObservableList<TaskDto> getTaskList(BigInteger presetId) {
+//        return formatList(taskRepo.getByPresetId(presetId));
+//    }
 
     public void saveOrUpdateTask(TaskDto task) {
         taskRepo.save(TaskMapper.mapToEntity(task));

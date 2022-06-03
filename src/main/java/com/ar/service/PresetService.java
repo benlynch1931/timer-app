@@ -42,6 +42,10 @@ public class PresetService {
         this.presetList = formatList(this.presetRepo.findAll());
     }
 
+    public PresetDto getPreset(BigInteger presetId) {
+        return PresetMapper.mapToDto(presetRepo.getById(presetId));
+    }
+
     /**
      * Formats list to be compatible with JavaFX
      * @param presetList list to format

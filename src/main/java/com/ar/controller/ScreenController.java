@@ -20,11 +20,6 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class ScreenController {
 
-
-//    private Stage stage;
-//    private Scene scene;
-//    private Parent root;
-
     private final ApplicationContext applicationContext;
 
 

@@ -41,7 +41,6 @@ public class TaskController {
 
     @FXML
     private Button save;
-
     @FXML
     private Button back;
 

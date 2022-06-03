@@ -38,4 +38,10 @@ public class ComponentSize {
     public static final double TASK_BTN_WIDTH = ComponentUtils.thirtyPct(SCREEN_WIDTH);
     public static final double TASK_BTN_TOP = 0.25 * TASK_BOX_HGT;
 
+
+    public static final double TASKLIST_TITLE_TOP = 74;
+    public static final double TASKLIST_BTN_TOP = 68;
+    public static final double TASKLIST_TITLE_SIZE = 20;
+    public static final double TASKLIST_TABLE_TOP = 124;
+
 }

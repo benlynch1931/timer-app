@@ -19,4 +19,8 @@ public interface PresetRepo extends JpaRepository<Preset, BigInteger> {
     @Transactional
     @Query("DELETE FROM ActiveTask t WHERE t.presetId=:presetId")
     void deleteByPresetId(BigInteger presetId);
+
+    @Transactional
+    @Query("SELECT p FROM Preset p WHERE p.id=:presetId")
+    Preset getById(BigInteger presetId);
 }
