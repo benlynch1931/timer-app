@@ -71,7 +71,7 @@ public class CellFactory {
                 super.updateItem(item, empty);
                 setGraphic(null);
                 setText(null);
-                if (!empty && !getTableView().getItems().get(getIndex()).getName().equals("New Task")) {
+                if (!empty) {
                     TaskDto currentTask = getTableView().getItems().get(getIndex());
                     setGraphic(ButtonUtils.generateTaskViewButton(currentTask,  screenController, currentRecordViewService));
                 }

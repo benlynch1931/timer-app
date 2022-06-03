@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -54,6 +55,11 @@ public class CurrentRecordViewService {
 
     public Task getTaskRecord() {
         BigInteger taskId = currentRecordViewRepo.getRecordIdByScene("TASK");
+        if (Objects.equals(taskId, BigInteger.ZERO)) {
+            Task newTask = new Task();
+            newTask.setPresetId(currentRecordViewRepo.getRecordIdByScene("TASKLIST"));
+            return newTask;
+        }
         return taskRepo.getById(taskId);
     }
 }

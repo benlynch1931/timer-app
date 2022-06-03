@@ -88,6 +88,8 @@ public class TaskController {
         }
         if (ObjectUtils.isNotNull(task.getName())) {
             taskName.setText(task.getName());
+        } else {
+            taskName.setPromptText("New Task");
         }
     }
 

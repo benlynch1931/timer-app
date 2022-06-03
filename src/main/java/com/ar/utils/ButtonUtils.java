@@ -9,6 +9,8 @@ import com.ar.service.PresetService;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 
+import java.math.BigInteger;
+
 /**
  * @author Ben Lynch
  */
@@ -51,13 +53,14 @@ public class ButtonUtils {
         final Button taskButton = new Button();
         taskButton.setMinWidth(ComponentSize.COL_PRESET_WIDTH - 10);
         taskButton.setOnAction(event -> {
+            final boolean updatedRecord;
             if (currentTask.getName().equals("New Task")) {
-                // TODO: View Create Task
+                updatedRecord = currentRecordViewService.updateRecord("TASK", BigInteger.ZERO);
             } else {
-                final boolean updatedRecord = currentRecordViewService.updateRecord("TASK", currentTask.getId());
-                screenController.switchToTaskView(event);
+                updatedRecord = currentRecordViewService.updateRecord("TASK", currentTask.getId());
                 // TODO: View Task
             }
+            screenController.switchToTaskView(event);
         });
         taskButton.setText(currentTask.getName());
         return taskButton;
