@@ -17,14 +17,18 @@ public class TimeValidator {
      */
     public static boolean validateTimeValues(String[] timeValues) {
         boolean isValid = true;
+        boolean isZero = false;
         for (final String val : timeValues) {
             try {
-                Integer.parseInt(val);
+                int integer = Integer.parseInt(val);
+                if (!isZero) {
+                    isZero = integer == 0;
+                }
             } catch(Exception e) {
                 isValid = false;
                 break;
             }
         }
-        return isValid;
+        return isValid && !isZero;
     }
 }

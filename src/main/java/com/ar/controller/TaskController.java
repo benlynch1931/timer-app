@@ -9,6 +9,7 @@ import com.ar.service.TaskService;
 import com.ar.utils.ComponentUtils;
 import com.ar.utils.ObjectUtils;
 import com.ar.utils.TaskUtils;
+import com.ar.validator.NameValidator;
 import com.ar.validator.TimeValidator;
 import javafx.application.HostServices;
 import javafx.fxml.FXML;
@@ -16,7 +17,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import lombok.RequiredArgsConstructor;
@@ -53,6 +54,8 @@ public class TaskController {
 
     @FXML
     private Label timeError;
+    @FXML
+    private Label nameError;
 
     private TaskDto task;
 
@@ -64,7 +67,7 @@ public class TaskController {
 
     private void setContainerMeasures() {
         ComponentUtils.setTaskContainerSize(buttonBox);
-        ComponentUtils.setTaskContainerSize(nameBox);
+        ComponentUtils.setTaskContainerSize(nameBox, ComponentSize.TASK_NAME_BOX_HGT);
         ComponentUtils.setTaskContainerSize(durationPane, ComponentSize.TASK_DURATION_PANE_HGT);
 
         buttonBox.relocate(0, ComponentSize.TASK_BUTTON_BOX_TOP);
@@ -101,11 +104,19 @@ public class TaskController {
     }
 
     private void setTimeErrorLabel() {
-        timeError.setTextFill(Paint.valueOf("#FF0000"));
-        timeError.setFont(new Font(ComponentSize.TASK_TIME_ERROR_SIZE));
-        timeError.setAlignment(Pos.CENTER);
-        timeError.setMinWidth(ComponentSize.SCREEN_WIDTH);
-        timeError.relocate(0, ComponentSize.TASK_TIME_ERROR_TOP);
+        setErrorLabel(timeError, ComponentSize.TASK_TIME_ERROR_TOP);
+    }
+
+    private void setNameErrorLabel() {
+        setErrorLabel(nameError, ComponentSize.TASK_NAME_ERROR_TOP);
+    }
+
+    private void setErrorLabel(final Label label, final double topMargin) {
+        label.setTextFill(Paint.valueOf("#FF0000"));
+        label.setFont(new Font(ComponentSize.TASK_ERROR_SIZE));
+        label.setAlignment(Pos.CENTER);
+        label.setMinWidth(ComponentSize.SCREEN_WIDTH);
+        label.relocate(0, topMargin);
     }
 
     private void updateTaskInfo() {
@@ -119,13 +130,19 @@ public class TaskController {
         ComponentUtils.setTaskButtonDimensions(save);
         ComponentUtils.setTaskButtonDimensions(back);
         save.setOnAction(event -> {
-            if (TimeValidator.validateTimeValues(getTimeValues())) {
+            boolean timeValid = TimeValidator.validateTimeValues(getTimeValues());
+            boolean nameValid = NameValidator.validateName(taskName.getText());
+            if (!timeValid) {
+                timeError.setText("Error with time values...");
+            }
+            if (!nameValid) {
+                nameError.setText("Task name cannot be empty...");
+            }
+            if (timeValid & nameValid) {
                 timeError.setText("");
                 updateTaskInfo();
                 taskService.saveOrUpdateTask(task);
                 screenController.switchToTaskListView(event);
-            } else {
-                timeError.setText("Error with time values...");
             }
         });
         back.setOnAction(screenController::switchToTaskListView);
@@ -143,6 +160,8 @@ public class TaskController {
         setTaskInfo();
         setContainerMeasures();
         setTimeErrorLabel();
+        setNameErrorLabel();
+        nameBox.setBorder(new Border(new BorderStroke(Paint.valueOf("#000000"), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
     }
 }
 

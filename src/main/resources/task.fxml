@@ -11,6 +11,7 @@
 
         <AnchorPane fx:id="nameBox">
                 <TextField fx:id="taskName" />
+                <Label fx:id="nameError" />
         </AnchorPane>
 
         <AnchorPane fx:id="durationPane">
