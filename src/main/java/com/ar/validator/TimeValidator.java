@@ -10,11 +10,15 @@ public class TimeValidator {
      */
     private TimeValidator() {}
 
+    /**
+     * Validates if time values are numbers
+     * @param timeValues array of values
+     * @return true if valid numbers
+     */
     public static boolean validateTimeValues(String[] timeValues) {
         boolean isValid = true;
         for (final String val : timeValues) {
             try {
-                System.out.println(val);
                 Integer.parseInt(val);
             } catch(Exception e) {
                 isValid = false;

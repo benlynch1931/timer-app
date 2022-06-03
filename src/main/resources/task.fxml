@@ -11,10 +11,10 @@
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.ar.controller.TaskController">
 
-        <HBox fx:id="buttonBox">
+        <AnchorPane fx:id="buttonBox">
                 <Button fx:id="save" />
                 <Button fx:id="back" />
-        </HBox>
+        </AnchorPane>
 
         <AnchorPane fx:id="nameBox">
                 <TextField fx:id="taskName" />

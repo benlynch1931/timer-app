@@ -1,5 +1,7 @@
 package com.ar.config;
 
+import com.ar.utils.ComponentUtils;
+
 /**
  * @author Ben Lynch
  */
@@ -35,4 +37,9 @@ public class ComponentSize {
     public static final int TASK_TEXT_FIELD_TOP = 20;
 
     public static final double TASK_TIME_ERROR_TOP = TASK_DURATION_PANE_HGT - (0.5 * TASK_TEXT_FIELD_HGT) - TASK_TIME_ERROR_SIZE;
+
+    public static final double TASK_BTN_HEIGHT = 32;
+    public static final double TASK_BTN_WIDTH = ComponentUtils.thirtyPct(SCREEN_WIDTH);
+    public static final double TASK_BTN_TOP = 0.25 * TASK_BOX_HGT;
+
 }

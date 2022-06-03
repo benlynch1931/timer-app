@@ -30,7 +30,7 @@ import org.springframework.stereotype.Component;
 public class TaskController {
 
     @FXML
-    private HBox buttonBox;
+    private AnchorPane buttonBox;
     @FXML
     private AnchorPane durationPane;
     @FXML
@@ -72,9 +72,7 @@ public class TaskController {
         nameBox.relocate(0, ComponentSize.TASK_NAME_BOX_TOP);
         durationPane.relocate(0, ComponentSize.TASK_DURATION_PANE_TOP);
 
-        buttonBox.setBorder(new Border(new BorderStroke(Paint.valueOf("#000000"), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        nameBox.setBorder(new Border(new BorderStroke(Paint.valueOf("#000000"), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        durationPane.setBorder(new Border(new BorderStroke(Paint.valueOf("#000000"), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
     }
 
     private void setTaskInfo() {
@@ -84,7 +82,7 @@ public class TaskController {
         seconds.setPromptText("SS");
         if (ObjectUtils.isNotNull(task.getDuration())) {
             String[] duration = TaskUtils.convertSecondsToTime(task.getDuration()).split(":");
-            duration = TaskUtils.formatDurationText(duration, FormatType.DISPLAY);
+            TaskUtils.formatDurationText(duration, FormatType.DISPLAY);
             hours.setText(duration[0]);
             minutes.setText(duration[1]);
             seconds.setText(duration[2]);
@@ -111,15 +109,15 @@ public class TaskController {
 
     private void updateTaskInfo() {
         task.setName(taskName.getText());
-//        task.setDuration(TaskUtils.convertTimeToSeconds(new String[]{hours.getText(), minutes.getText(), seconds.getText() }));
         task.setDuration(TaskUtils.convertTimeToSeconds(getTimeValues()));
     }
 
     private void setButtonInfo() {
         save.setText("SAVE");
         back.setText("BACK");
+        ComponentUtils.setTaskButtonDimensions(save);
+        ComponentUtils.setTaskButtonDimensions(back);
         save.setOnAction(event -> {
-//            TaskUtils.formatDurationText(new String[]{ hours.getText(), minutes.getText(), seconds.getText() }, FormatType.SAVE);
             if (TimeValidator.validateTimeValues(getTimeValues())) {
                 timeError.setText("");
                 updateTaskInfo();

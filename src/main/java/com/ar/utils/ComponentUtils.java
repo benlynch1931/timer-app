@@ -1,6 +1,7 @@
 package com.ar.utils;
 
 import com.ar.config.ComponentSize;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
@@ -16,6 +17,9 @@ public class ComponentUtils {
 
     public static double twentyPct(final long value) {
         return value * 0.2;
+    }
+    public static double thirtyPct(final long value) {
+        return value * 0.3;
     }
     public static double fiftyPct(final long value) {
         return value * 0.5;
@@ -46,5 +50,20 @@ public class ComponentUtils {
         component.setMaxWidth(ComponentSize.TASK_NAME_FIELD_WIDTH);
         component.setMinWidth(ComponentSize.TASK_NAME_FIELD_WIDTH);
         component.setTranslateX(ComponentSize.TASK_NAME_FIELD_MARGIN);
+
+        component.relocate(0, ComponentSize.TASK_TEXT_FIELD_TOP);
+    }
+
+    public static void setTaskButtonDimensions(final Button button) {
+        button.setMinWidth(ComponentSize.TASK_BTN_WIDTH);
+        button.setMaxWidth(ComponentSize.TASK_BTN_WIDTH);
+        button.setMaxHeight(ComponentSize.TASK_BTN_HEIGHT);
+        button.setMinHeight(ComponentSize.TASK_BTN_HEIGHT);
+
+        if (button.getText().equals("SAVE")) {
+            button.relocate(ComponentSize.SCREEN_WIDTH - ComponentSize.TASK_BTN_WIDTH, ComponentSize.TASK_BTN_TOP);
+        } else {
+            button.relocate(0, ComponentSize.TASK_BTN_TOP);
+        }
     }
 }
