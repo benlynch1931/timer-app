@@ -1,18 +1,13 @@
 package com.ar.service;
 
-import com.ar.dto.PresetDto;
 import com.ar.dto.TaskDto;
-import com.ar.entity.Preset;
 import com.ar.entity.Task;
-import com.ar.mapper.PresetMapper;
 import com.ar.mapper.TaskMapper;
-import com.ar.repository.ActiveTaskRepo;
 import com.ar.repository.PresetRepo;
 import com.ar.repository.TaskRepo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
