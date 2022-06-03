@@ -21,6 +21,7 @@ public class TaskMapper {
     public static TaskDto mapToDto(final Task task) {
         return TaskDto.builder()
                 .id(task.getId())
+                .presetId(task.getPresetId())
                 .name(task.getName())
                 .duration(task.getDuration())
                 .build();
@@ -47,6 +48,7 @@ public class TaskMapper {
         task.setId(taskDto.getId());
         task.setName(taskDto.getName());
         task.setDuration(taskDto.getDuration());
+        task.setPresetId(taskDto.getPresetId());
         return task;
     }
 }

@@ -1,22 +1,26 @@
 package com.ar.controller;
 
 import com.ar.config.ComponentSize;
+import com.ar.config.FormatType;
 import com.ar.dto.TaskDto;
 import com.ar.mapper.TaskMapper;
 import com.ar.service.CurrentRecordViewService;
 import com.ar.service.TaskService;
+import com.ar.utils.ComponentUtils;
 import com.ar.utils.ObjectUtils;
 import com.ar.utils.TaskUtils;
+import com.ar.validator.TimeValidator;
 import javafx.application.HostServices;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-
-import java.awt.*;
 
 /**
  * @author Ben Lynch
@@ -48,6 +52,9 @@ public class TaskController {
     @FXML
     private TextField seconds;
 
+    @FXML
+    private Label timeError;
+
     private TaskDto task;
 
     private final HostServices hostServices;
@@ -56,31 +63,28 @@ public class TaskController {
     private final CurrentRecordViewService currentRecordViewService;
     private final ScreenController screenController;
 
-    public void setComponentBoxes() {
-        buttonBox.setMinHeight(ComponentSize.TASK_BOX_HGT);
-        nameBox.setMinHeight(ComponentSize.TASK_BOX_HGT);
-        durationPane.setMinHeight(ComponentSize.TASK_BOX_HGT);
-        buttonBox.setMaxHeight(ComponentSize.TASK_BOX_HGT);
-        nameBox.setMaxHeight(ComponentSize.TASK_BOX_HGT);
-        durationPane.setMaxHeight(ComponentSize.TASK_BOX_HGT);
-        buttonBox.setTranslateY(ComponentSize.TASK_BUTTON_BOX_TOP);
-        nameBox.setTranslateY(ComponentSize.TASK_NAME_BOX_TRANS_Y);
-        durationPane.setTranslateY(ComponentSize.TASK_DURATION_PANE_TRANS_Y);
+    private void setContainerMeasures() {
+        ComponentUtils.setTaskContainerSize(buttonBox);
+        ComponentUtils.setTaskContainerSize(nameBox);
+        ComponentUtils.setTaskContainerSize(durationPane, ComponentSize.TASK_DURATION_PANE_HGT);
+
+        buttonBox.relocate(0, ComponentSize.TASK_BUTTON_BOX_TOP);
+        nameBox.relocate(0, ComponentSize.TASK_NAME_BOX_TOP);
+        durationPane.relocate(0, ComponentSize.TASK_DURATION_PANE_TOP);
 
         buttonBox.setBorder(new Border(new BorderStroke(Paint.valueOf("#000000"), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         nameBox.setBorder(new Border(new BorderStroke(Paint.valueOf("#000000"), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         durationPane.setBorder(new Border(new BorderStroke(Paint.valueOf("#000000"), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
     }
 
-
-    public void setTaskInfo() {
+    private void setTaskInfo() {
         taskName.setPromptText("Task Name");
         hours.setPromptText("HH");
         minutes.setPromptText("MM");
         seconds.setPromptText("SS");
         if (ObjectUtils.isNotNull(task.getDuration())) {
-            final String[] duration = TaskUtils.convertSecondsToTime(task.getDuration()).split(":");
-            TaskUtils.formatDurationText(duration);
+            String[] duration = TaskUtils.convertSecondsToTime(task.getDuration()).split(":");
+            duration = TaskUtils.formatDurationText(duration, FormatType.DISPLAY);
             hours.setText(duration[0]);
             minutes.setText(duration[1]);
             seconds.setText(duration[2]);
@@ -91,37 +95,45 @@ public class TaskController {
     }
 
     private void setComponentDimensions() {
-//        setNameComponentDimensions(taskName);
-        setDurationComponentDimensions(hours, 0);
-        setDurationComponentDimensions(minutes, 1);
-        setDurationComponentDimensions(seconds, 2);
+        ComponentUtils.setTaskNameComponentDimensions(taskName);
+        ComponentUtils.setDurationComponentDimensions(hours, 0);
+        ComponentUtils.setDurationComponentDimensions(minutes, 1);
+        ComponentUtils.setDurationComponentDimensions(seconds, 2);
     }
 
-    public void setNameComponentDimensions(final TextField component) {
-//        component.setMaxWidth(ComponentSize.TASK_NAME_FIELD_WIDTH);
-//        component.setMinWidth(ComponentSize.TASK_NAME_FIELD_WIDTH);
-        System.out.println(component.getLayoutY());
-        System.out.println(component.getTranslateY());
-//        component.setTranslateX(ComponentSize.TASK_NAME_FIELD_MARGIN);
+    private void setTimeErrorLabel() {
+        timeError.setTextFill(Paint.valueOf("#FF0000"));
+        timeError.setFont(new Font(ComponentSize.TASK_TIME_ERROR_SIZE));
+        timeError.setAlignment(Pos.CENTER);
+        timeError.setMinWidth(ComponentSize.SCREEN_WIDTH);
+        timeError.relocate(0, ComponentSize.TASK_TIME_ERROR_TOP);
     }
 
-    public void setDurationComponentDimensions(final TextField component, final int fieldNo) {
-        component.setMaxWidth(ComponentSize.TASK_DURATION_FIELDS);
-        component.setMaxWidth(ComponentSize.TASK_DURATION_FIELDS);
-
-        int xCoordinate = (ComponentSize.TASK_DURATION_MARGIN) + (ComponentSize.TASK_DURATION_FIELDS * fieldNo) + (ComponentSize.TASK_DURATION_SPACER * fieldNo);
-        component.relocate(xCoordinate, 0);
+    private void updateTaskInfo() {
+        task.setName(taskName.getText());
+//        task.setDuration(TaskUtils.convertTimeToSeconds(new String[]{hours.getText(), minutes.getText(), seconds.getText() }));
+        task.setDuration(TaskUtils.convertTimeToSeconds(getTimeValues()));
     }
 
     private void setButtonInfo() {
         save.setText("SAVE");
         back.setText("BACK");
         save.setOnAction(event -> {
-            taskService.saveOrUpdateTask(task);
-            screenController.switchToTaskListView(event);
+//            TaskUtils.formatDurationText(new String[]{ hours.getText(), minutes.getText(), seconds.getText() }, FormatType.SAVE);
+            if (TimeValidator.validateTimeValues(getTimeValues())) {
+                timeError.setText("");
+                updateTaskInfo();
+                taskService.saveOrUpdateTask(task);
+                screenController.switchToTaskListView(event);
+            } else {
+                timeError.setText("Error with time values...");
+            }
         });
-
         back.setOnAction(screenController::switchToTaskListView);
+    }
+
+    private String[] getTimeValues() {
+        return TaskUtils.formatDurationText(new String[]{ hours.getText(), minutes.getText(), seconds.getText() }, FormatType.SAVE);
     }
 
     @FXML
@@ -130,7 +142,8 @@ public class TaskController {
         setButtonInfo();
         setComponentDimensions();
         setTaskInfo();
-        setComponentBoxes();
+        setContainerMeasures();
+        setTimeErrorLabel();
     }
 }
 

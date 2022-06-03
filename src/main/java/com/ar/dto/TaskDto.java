@@ -18,6 +18,8 @@ public class TaskDto {
 
     private BigInteger id;
 
+    private BigInteger presetId;
+
     private String name;
 
     private BigInteger duration;

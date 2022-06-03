@@ -1,5 +1,6 @@
 package com.ar.utils;
 
+import com.ar.config.FormatType;
 import com.ar.config.TimeValues;
 import com.ar.dto.PresetDto;
 import com.ar.dto.TaskDto;
@@ -78,12 +79,28 @@ public class TaskUtils {
      * Replaces 00 with null for Task View, so placeholder shows instead of 0
      * @param duration Array of duration elements: hr,min,sec
      */
-    public static void formatDurationText(final String[] duration) {
+    public static String[] formatDurationText(final String[] duration, FormatType formatType) {
         for(int i=0; i<duration.length; i++) {
-            if (duration[i].equals("00")) {
+            if (formatType == FormatType.DISPLAY && duration[i].equals("00")) {
                 duration[i] = null;
+            } else if (formatType == FormatType.SAVE
+                    && (ObjectUtils.isNull(duration[i]) || duration[i].equals(""))) {
+                duration[i] = "00";
             }
         }
+        return duration;
+    }
+
+    /**
+     * Used to convert user's inputted time values to a seconds duration
+     * @param time user's inputs
+     * @return duration in seconds
+     */
+    public static BigInteger convertTimeToSeconds(final String[] time) {
+        int hours = Integer.parseInt(time[0]) * TimeValues.TO_HOURS;
+        int minutes = Integer.parseInt(time[1]) * TimeValues.TO_MINUTES;
+        int seconds = Integer.parseInt(time[2]);
+        return BigInteger.valueOf(hours + minutes + seconds);
     }
 
 }
