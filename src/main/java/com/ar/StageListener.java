@@ -27,7 +27,7 @@ public class StageListener implements ApplicationListener<StageReadyEvent> {
 
 
     public StageListener(@Value("${timer.application.title}") String title,
-                         @Value("classpath:/preset.fxml") Resource resource, ApplicationContext ac) {
+                         @Value("classpath:/presetList.fxml") Resource resource, ApplicationContext ac) {
         this.title = title;
         this.fxml = resource;
         this.applicationContext = ac;

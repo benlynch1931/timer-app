@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @RequiredArgsConstructor
-public class PresetController {
+public class PresetListController {
 
     @FXML
     private TableView<PresetDto> table = new TableView<>();
@@ -40,6 +40,7 @@ public class PresetController {
     private final CellFactory cellFactory;
 
     public void generatePresetList() {
+        table.relocate(0, ComponentSize.LIST_TABLE_TOP);
         table.setTranslateX(ComponentSize.TABLE_MARGIN);
         table.setMaxWidth(ComponentSize.TABLE_WIDTH);
         table.setMinWidth(ComponentSize.TABLE_WIDTH);
@@ -61,7 +62,7 @@ public class PresetController {
         c3.setCellFactory(cellFactory.startButton());
 
         table.getColumns().addAll(c1, c2, c3);
-        table.setItems(presetService.getPresetList());
+        table.setItems(presetService.getPresetListForDisplay());
     }
 
     @FXML

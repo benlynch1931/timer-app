@@ -31,16 +31,12 @@ public class PresetService {
 
     private final ActiveTaskRepo activeTaskRepo;
 
-    @Getter
-    private ObservableList<PresetDto> presetList;
-
     private final ApplicationContext applicationContext;
 
     public PresetService(PresetRepo presetRepo, ActiveTaskRepo activeTaskRepo, ApplicationContext applicationContext) {
         this.presetRepo = presetRepo;
         this.activeTaskRepo = activeTaskRepo;
         this.applicationContext = applicationContext;
-        this.presetList = formatList(this.presetRepo.findAll());
     }
 
     public PresetDto getPreset(BigInteger presetId) {
@@ -57,6 +53,10 @@ public class PresetService {
         presetList.forEach(preset -> observableList.add(PresetMapper.mapToDto(preset)));
         observableList.add(PresetDto.builder().name("New Preset").build());
         return observableList;
+    }
+
+    public ObservableList<PresetDto> getPresetListForDisplay() {
+        return formatList(presetRepo.findAll());
     }
 
     /**

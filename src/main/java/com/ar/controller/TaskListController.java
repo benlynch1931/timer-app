@@ -53,7 +53,7 @@ public class TaskListController {
     private void setButtonInfo() {
         back.setText("BACK");
         ComponentUtils.setTaskListButtonDimensions(back);
-        back.setOnAction(screenController::switchToPresetView);
+        back.setOnAction(screenController::switchToPresetListView);
     }
 
     private void setTitleInfo() {
