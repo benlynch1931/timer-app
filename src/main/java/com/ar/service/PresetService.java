@@ -15,10 +15,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 /**
  * @author Ben Lynch
@@ -40,6 +37,11 @@ public class PresetService {
     }
 
     public PresetDto getPreset(BigInteger presetId) {
+        if (Objects.equals(presetId, BigInteger.ZERO)) {
+            PresetDto preset = new PresetDto();
+            preset.setTaskList(new ArrayList<>());
+            return preset;
+        }
         return PresetMapper.mapToDto(presetRepo.getById(presetId));
     }
 
@@ -51,7 +53,7 @@ public class PresetService {
     private ObservableList<PresetDto> formatList(List<Preset> presetList) {
         ObservableList<PresetDto> observableList = FXCollections.observableArrayList();
         presetList.forEach(preset -> observableList.add(PresetMapper.mapToDto(preset)));
-        observableList.add(PresetDto.builder().name("New Preset").taskList(new ArrayList<>()).build());
+        observableList.add(PresetDto.builder().name("New Preset").build());
         return observableList;
     }
 
@@ -124,7 +126,12 @@ public class PresetService {
      * @return duration of preset
      */
     public BigInteger getPresetNewDuration(final List<TaskDto> taskList) {
-        taskList.sort((o1, o2) -> o2.getDuration().subtract(o1.getDuration()).intValue());
+        if (taskList.isEmpty()) {
+            return BigInteger.ZERO;
+        }
+        if (taskList.size() > 1) {
+            taskList.sort((o1, o2) -> o2.getDuration().subtract(o1.getDuration()).intValue());
+        }
         return taskList.get(0).getDuration();
     }
 

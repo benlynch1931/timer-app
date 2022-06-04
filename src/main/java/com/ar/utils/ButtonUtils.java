@@ -33,7 +33,8 @@ public class ButtonUtils {
         presetButton.setMinWidth(ComponentSize.COL_PRESET_WIDTH - 10);
         presetButton.setOnAction(event -> {
             if (currentPreset.getName().equals("New Preset")) {
-                // TODO: View Create Preset
+                final boolean updatedRecord = currentRecordViewService.updateRecord("TASKLIST", BigInteger.ZERO);
+                screenController.switchToPresetView(event);
             } else {
                 final boolean updatedRecord = currentRecordViewService.updateRecord("TASKLIST", currentPreset.getId());
                 screenController.switchToTaskListView(event);
