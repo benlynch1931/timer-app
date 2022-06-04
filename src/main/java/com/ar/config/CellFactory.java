@@ -1,5 +1,6 @@
 package com.ar.config;
 
+import com.ar.controller.PresetController;
 import com.ar.controller.ScreenController;
 import com.ar.dto.PresetDto;
 import com.ar.dto.TaskDto;
@@ -88,6 +89,22 @@ public class CellFactory {
                 if (!empty && !getTableView().getItems().get(getIndex()).getName().equals("New Task")) {
                     String newText = TaskUtils.convertSecondsToTime(getTableView().getItems().get(getIndex()).getDuration());
                     setText(newText);
+                }
+            }
+        };
+    }
+
+    public Callback<TableColumn<PresetDto, String>, TableCell<TaskDto, String>> deleteTaskButton() {
+        return (final TableColumn<PresetDto, String> param) -> new TableCell<>() {
+
+            @Override
+            public void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                setGraphic(null);
+                setText(null);
+                if (!empty) {
+                    TaskDto currentTask = getTableView().getItems().get(getIndex());
+                    setGraphic(ButtonUtils.generateDeleteTaskButton(currentTask, taskService));
                 }
             }
         };

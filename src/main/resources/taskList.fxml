@@ -9,6 +9,7 @@
 <!--    <children>-->
         <Label fx:id="label" />
         <Button fx:id="back" />
+        <Button fx:id="edit" />
 
         <TableView fx:id="table" />
 <!--    </children>-->

@@ -57,4 +57,7 @@ public class TaskService {
         taskRepo.save(TaskMapper.mapToEntity(task));
     }
 
+    public void deleteTask(TaskDto currentTask) {
+        taskRepo.delete(TaskMapper.mapToEntity(currentTask));
+    }
 }

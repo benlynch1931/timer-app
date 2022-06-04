@@ -114,8 +114,11 @@ public class ComponentUtils {
         button.setMaxWidth(ComponentSize.TASK_BTN_WIDTH);
         button.setMaxHeight(ComponentSize.TASK_BTN_HEIGHT);
         button.setMinHeight(ComponentSize.TASK_BTN_HEIGHT);
-
-        button.relocate(0, ComponentSize.TASKLIST_BTN_TOP);
+        if (button.getText().equals("EDIT")) {
+            button.relocate(ComponentSize.SCREEN_WIDTH - ComponentSize.TASK_BTN_WIDTH, ComponentSize.TASKLIST_BTN_TOP);
+        } else {
+            button.relocate(0, ComponentSize.TASKLIST_BTN_TOP);
+        }
 
     }
 }

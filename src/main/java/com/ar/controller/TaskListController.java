@@ -38,6 +38,8 @@ public class TaskListController {
     private Label label;
     @FXML
     private Button back;
+    @FXML
+    private Button edit;
 
     private BigInteger presetId;
     private PresetDto preset;
@@ -53,8 +55,11 @@ public class TaskListController {
 
     private void setButtonInfo() {
         back.setText("BACK");
+        edit.setText("EDIT");
         ComponentUtils.setTaskListButtonDimensions(back);
+        ComponentUtils.setTaskListButtonDimensions(edit);
         back.setOnAction(screenController::switchToPresetListView);
+        edit.setOnAction(screenController::switchToPresetView);
     }
 
     private void setTitleInfo() {

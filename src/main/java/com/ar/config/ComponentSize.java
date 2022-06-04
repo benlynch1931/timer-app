@@ -14,7 +14,7 @@ public class ComponentSize {
     public static final int TABLE_WIDTH = SCREEN_WIDTH - (2*TABLE_MARGIN);
     public static final int COL_PRESET_WIDTH = 210;
     public static final int COL_OTHER_WIDTH = (TABLE_WIDTH - COL_PRESET_WIDTH) / 2;
-    public static final int COL_DELETE_WIDTH = 20;
+    public static final int COL_DELETE_WIDTH = 30;
     
     public static final int TASK_DURATION_MARGIN = 69;
     public static final int TASK_DURATION_FIELDS = 69;

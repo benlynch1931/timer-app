@@ -1,11 +1,13 @@
 package com.ar.utils;
 
 import com.ar.config.ComponentSize;
+import com.ar.controller.PresetController;
 import com.ar.controller.ScreenController;
 import com.ar.dto.PresetDto;
 import com.ar.dto.TaskDto;
 import com.ar.service.CurrentRecordViewService;
 import com.ar.service.PresetService;
+import com.ar.service.TaskService;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 
@@ -34,8 +36,7 @@ public class ButtonUtils {
                 // TODO: View Create Preset
             } else {
                 final boolean updatedRecord = currentRecordViewService.updateRecord("TASKLIST", currentPreset.getId());
-//                screenController.switchToTaskListView(event);
-                screenController.switchToPresetView(event);
+                screenController.switchToTaskListView(event);
             }
         });
         presetButton.setText(currentPreset.getName());
@@ -64,6 +65,14 @@ public class ButtonUtils {
         });
         taskButton.setText(currentTask.getName());
         return taskButton;
+    }
+
+    public static Button generateDeleteTaskButton(final TaskDto currentTask, final TaskService taskService) {
+        final Button deleteButton = new Button();
+        deleteButton.setMinWidth(ComponentSize.COL_DELETE_WIDTH - 10);
+        deleteButton.setOnAction(event -> taskService.deleteTask(currentTask));
+        deleteButton.setText("TEST");
+        return deleteButton;
     }
 
     /**

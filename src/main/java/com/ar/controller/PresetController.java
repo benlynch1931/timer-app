@@ -19,6 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -47,6 +48,7 @@ public class PresetController {
     @FXML
     private Label nameError;
 
+    @Getter
     private PresetDto preset;
 
     private final HostServices hostServices;
@@ -77,9 +79,10 @@ public class PresetController {
 
         c1.setCellFactory(cellFactory.taskButton());
         c2.setCellFactory(cellFactory.durationText());
+        c3.setCellFactory(cellFactory.deleteTaskButton());
         // TODO: delete button [only from list -> not db until save()]
 
-        table.getColumns().addAll(c1, c2);
+        table.getColumns().addAll(c1, c2, c3);
         table.setItems(TaskUtils.formatList(preset.getTaskList(), DisplayType.DELETE));
     }
 
