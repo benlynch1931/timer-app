@@ -2,6 +2,7 @@ package com.ar.controller;
 
 import com.ar.config.ComponentSize;
 import com.ar.config.FormatType;
+import com.ar.config.TimeType;
 import com.ar.dto.TaskDto;
 import com.ar.service.CurrentRecordViewService;
 import com.ar.service.PresetService;
@@ -98,9 +99,9 @@ public class TaskController {
 
     private void setComponentDimensions() {
         ComponentUtils.setTaskNameComponentDimensions(taskName);
-        ComponentUtils.setDurationComponentDimensions(hours, 0);
-        ComponentUtils.setDurationComponentDimensions(minutes, 1);
-        ComponentUtils.setDurationComponentDimensions(seconds, 2);
+        ComponentUtils.setDurationComponentDimensions(hours, TimeType.HOUR);
+        ComponentUtils.setDurationComponentDimensions(minutes, TimeType.MIN);
+        ComponentUtils.setDurationComponentDimensions(seconds, TimeType.SEC);
     }
 
     private void setTimeErrorLabel() {

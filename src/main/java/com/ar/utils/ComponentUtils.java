@@ -1,6 +1,7 @@
 package com.ar.utils;
 
 import com.ar.config.ComponentSize;
+import com.ar.config.TimeType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -64,14 +65,14 @@ public class ComponentUtils {
     /**
      * Sets Duration-specific TextField width, height and coordinates
      * @param component Component to set dimensions
-     * @param fieldNo index representing order of HH->MM->SS
+     * @param timeType enum representing order of HH->MM->SS
      */
-    public static void setDurationComponentDimensions(final TextField component, final int fieldNo) {
+    public static void setDurationComponentDimensions(final TextField component, final TimeType timeType) {
         component.setMaxWidth(ComponentSize.TASK_DURATION_FIELDS);
         component.setMaxWidth(ComponentSize.TASK_DURATION_FIELDS);
         component.setMinHeight(ComponentSize.TASK_TEXT_FIELD_HGT);
 
-        int xCoordinate = (ComponentSize.TASK_DURATION_MARGIN) + (ComponentSize.TASK_DURATION_FIELDS * fieldNo) + (ComponentSize.TASK_DURATION_SPACER * fieldNo);
+        int xCoordinate = (ComponentSize.TASK_DURATION_MARGIN) + (ComponentSize.TASK_DURATION_FIELDS * timeType.times()) + (ComponentSize.TASK_DURATION_SPACER * timeType.times());
         component.relocate(xCoordinate, ComponentSize.TASK_TEXT_FIELD_TOP);
     }
 
