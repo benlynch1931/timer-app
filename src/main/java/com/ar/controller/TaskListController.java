@@ -69,11 +69,8 @@ public class TaskListController {
         edit.setOnAction(screenController::switchToPresetView);
         clone.setOnAction(event -> {
             Preset newPreset = presetService.clonePreset(preset);
-            System.out.println("Cloned");
             currentRecordViewService.updateRecord("TASKLIST", newPreset.getId());
-            System.out.println("view updated");
             screenController.switchToTaskListView(event);
-            System.out.println("View switched");
         });
     }
 
