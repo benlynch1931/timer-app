@@ -10,6 +10,7 @@ import com.ar.service.PresetService;
 import com.ar.service.TaskService;
 import com.ar.utils.ComponentUtils;
 import com.ar.utils.TaskUtils;
+import com.ar.utils.TimeUtils;
 import javafx.application.HostServices;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -35,13 +36,14 @@ public class TaskListController {
     private TableView<TaskDto> table = new TableView<>();
 
     @FXML
-    private Label label;
+    private Label presetName;
+    @FXML
+    private Label duration;
     @FXML
     private Button back;
     @FXML
     private Button edit;
 
-    private BigInteger presetId;
     private PresetDto preset;
 
     private final HostServices hostServices;
@@ -63,15 +65,23 @@ public class TaskListController {
     }
 
     private void setTitleInfo() {
-        label.relocate(0, ComponentSize.TASKLIST_TITLE_TOP);
-        label.setMinWidth(ComponentSize.SCREEN_WIDTH);
-        label.setFont(new Font(ComponentSize.TASKLIST_TITLE_SIZE));
-        label.setAlignment(Pos.CENTER);
-        label.setText(preset.getName());
+        presetName.relocate(0, ComponentSize.TASKLIST_TITLE_TOP);
+        presetName.setMinWidth(ComponentSize.SCREEN_WIDTH);
+        presetName.setFont(new Font(ComponentSize.TASKLIST_TITLE_SIZE));
+        presetName.setAlignment(Pos.CENTER);
+        presetName.setText(preset.getName());
+    }
+
+    private void setDurationInfo() {
+        duration.relocate(0, ComponentSize.TASKLIST_DURATION_TOP);
+        duration.setMinWidth(ComponentSize.SCREEN_WIDTH);
+        duration.setFont(new Font(ComponentSize.TASKLIST_DURATION_SIZE));
+        duration.setAlignment(Pos.CENTER);
+        duration.setText(TimeUtils.convertSecondsToTime(preset.getDuration()));
     }
 
     public void generateTaskList() {
-        table.relocate(0, ComponentSize.LIST_TABLE_TOP);
+        table.relocate(0, ComponentSize.TASKLIST_TABLE_TOP);
         table.setTranslateX(ComponentSize.TABLE_MARGIN);
         table.setMaxWidth(ComponentSize.TABLE_WIDTH);
         table.setMinWidth(ComponentSize.TABLE_WIDTH);
@@ -94,10 +104,11 @@ public class TaskListController {
 
     @FXML
     public void initialize() {
-        label.setText("Task List View");
-        presetId = currentRecordViewService.getTaskListRecordId();
+        presetName.setText("Task List View");
+        final var presetId = currentRecordViewService.getTaskListRecordId();
         preset = presetService.getPreset(presetId);
         setTitleInfo();
+        setDurationInfo();
         setButtonInfo();
         generateTaskList();
     }

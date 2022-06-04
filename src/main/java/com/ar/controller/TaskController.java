@@ -9,6 +9,7 @@ import com.ar.service.TaskService;
 import com.ar.utils.ComponentUtils;
 import com.ar.utils.ObjectUtils;
 import com.ar.utils.TaskUtils;
+import com.ar.utils.TimeUtils;
 import com.ar.validator.NameValidator;
 import com.ar.validator.TimeValidator;
 import javafx.application.HostServices;
@@ -82,8 +83,8 @@ public class TaskController {
         minutes.setPromptText("MM");
         seconds.setPromptText("SS");
         if (ObjectUtils.isNotNull(task.getDuration())) {
-            String[] duration = TaskUtils.convertSecondsToTime(task.getDuration()).split(":");
-            TaskUtils.formatDurationText(duration, FormatType.DISPLAY);
+            String[] duration = TimeUtils.convertSecondsToTime(task.getDuration()).split(":");
+            TimeUtils.formatDurationText(duration, FormatType.DISPLAY);
             hours.setText(duration[0]);
             minutes.setText(duration[1]);
             seconds.setText(duration[2]);
@@ -120,7 +121,7 @@ public class TaskController {
 
     private void updateTaskInfo() {
         task.setName(taskName.getText());
-        task.setDuration(TaskUtils.convertTimeToSeconds(getTimeValues()));
+        task.setDuration(TimeUtils.convertTimeToSeconds(getTimeValues()));
     }
 
     private void setButtonInfo() {
@@ -150,7 +151,7 @@ public class TaskController {
     }
 
     private String[] getTimeValues() {
-        return TaskUtils.formatDurationText(new String[]{ hours.getText(), minutes.getText(), seconds.getText() }, FormatType.SAVE);
+        return TimeUtils.formatDurationText(new String[]{ hours.getText(), minutes.getText(), seconds.getText() }, FormatType.SAVE);
     }
 
     @FXML

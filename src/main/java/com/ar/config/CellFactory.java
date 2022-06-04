@@ -9,6 +9,7 @@ import com.ar.service.PresetService;
 import com.ar.service.TaskService;
 import com.ar.utils.ButtonUtils;
 import com.ar.utils.TaskUtils;
+import com.ar.utils.TimeUtils;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
@@ -87,7 +88,7 @@ public class CellFactory {
             public void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
                 if (!empty && !getTableView().getItems().get(getIndex()).getName().equals("New Task")) {
-                    String newText = TaskUtils.convertSecondsToTime(getTableView().getItems().get(getIndex()).getDuration());
+                    String newText = TimeUtils.convertSecondsToTime(getTableView().getItems().get(getIndex()).getDuration());
                     setText(newText);
                 }
             }

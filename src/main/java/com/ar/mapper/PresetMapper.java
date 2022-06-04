@@ -5,6 +5,9 @@ import com.ar.entity.Preset;
 import com.ar.utils.ObjectUtils;
 import com.ar.utils.PresetUtils;
 
+import java.math.BigInteger;
+import java.util.Objects;
+
 /**
  * @author Ben Lynch
  */
@@ -25,7 +28,11 @@ public class PresetMapper {
         presetDto.setDuration(preset.getDuration());
 
         if (ObjectUtils.isNotNull(preset.getDuration())) {
-            presetDto.setReadyAt(PresetUtils.viewFormat(PresetUtils.readyBy(preset.getDuration())));
+            if (Objects.equals(preset.getDuration(), BigInteger.ZERO)) {
+                presetDto.setReadyAt("N/A");
+            } else {
+                presetDto.setReadyAt(PresetUtils.viewFormat(PresetUtils.readyBy(preset.getDuration())));
+            }
         }
         if (ObjectUtils.isNotNull(preset.getTaskList())) {
             presetDto.setTaskList(TaskMapper.mapToDto(preset.getTaskList()));
