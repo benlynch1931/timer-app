@@ -106,14 +106,15 @@ public class PresetService {
 //        savePreset(presetList.get(presetIdx));
 //    }
 
+    /**
+     * Method to update preset with its new duration time, being the max duration of a task in the preset
+     * @param presetId id of preset to update
+     */
     public void updateDuration(final BigInteger presetId) {
         final Preset preset = presetRepo.getById(presetId);
-        long duration = 0L;
-        for (Task task : preset.getTaskList()) {
-            duration += task.getDuration().longValue();
-        }
-        preset.setDuration(BigInteger.valueOf(duration));
-        presetRepo.save(preset);
+        final List<Task> taskList = preset.getTaskList();
+        taskList.sort((o1, o2) -> o2.getDuration().subtract(o1.getDuration()).intValue());
+        preset.setDuration(taskList.get(0).getDuration());
     }
 
     public void savePreset(Preset presetToUpdate) {

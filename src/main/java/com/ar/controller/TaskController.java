@@ -3,7 +3,6 @@ package com.ar.controller;
 import com.ar.config.ComponentSize;
 import com.ar.config.FormatType;
 import com.ar.dto.TaskDto;
-import com.ar.mapper.TaskMapper;
 import com.ar.service.CurrentRecordViewService;
 import com.ar.service.PresetService;
 import com.ar.service.TaskService;
@@ -157,7 +156,7 @@ public class TaskController {
 
     @FXML
     public void initialize() {
-        task = taskService.getTaskList(currentRecordViewService);
+        task = taskService.getTaskForDisplay(currentRecordViewService);
         setButtonInfo();
         setComponentDimensions();
         setTaskInfo();
