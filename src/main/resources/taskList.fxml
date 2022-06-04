@@ -10,6 +10,7 @@
         <Label fx:id="presetName" />
         <Button fx:id="back" />
         <Button fx:id="edit" />
+        <Button fx:id="clone" />
         <Label fx:id="duration" />
 
         <TableView fx:id="table" />

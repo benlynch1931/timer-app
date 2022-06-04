@@ -5,6 +5,7 @@ import com.ar.config.ComponentSize;
 import com.ar.config.DisplayType;
 import com.ar.dto.PresetDto;
 import com.ar.dto.TaskDto;
+import com.ar.entity.Preset;
 import com.ar.service.CurrentRecordViewService;
 import com.ar.service.PresetService;
 import com.ar.service.TaskService;
@@ -43,6 +44,8 @@ public class TaskListController {
     private Button back;
     @FXML
     private Button edit;
+    @FXML
+    private Button clone;
 
     private PresetDto preset;
 
@@ -58,10 +61,20 @@ public class TaskListController {
     private void setButtonInfo() {
         back.setText("BACK");
         edit.setText("EDIT");
+        clone.setText("CLONE");
         ComponentUtils.setTaskListButtonDimensions(back);
         ComponentUtils.setTaskListButtonDimensions(edit);
+        ComponentUtils.setTaskListButtonDimensions(clone);
         back.setOnAction(screenController::switchToPresetListView);
         edit.setOnAction(screenController::switchToPresetView);
+        clone.setOnAction(event -> {
+            Preset newPreset = presetService.clonePreset(preset);
+            System.out.println("Cloned");
+            currentRecordViewService.updateRecord("TASKLIST", newPreset.getId());
+            System.out.println("view updated");
+            screenController.switchToTaskListView(event);
+            System.out.println("View switched");
+        });
     }
 
     private void setTitleInfo() {

@@ -142,4 +142,12 @@ public class PresetService {
     public void saveOrUpdateTask(final PresetDto preset) {
         presetRepo.save(PresetMapper.mapToEntity(preset));
     }
+
+    public Preset clonePreset(PresetDto presetDto) {
+        Preset preset = PresetMapper.mapToEntity(presetDto);
+        preset.setName("CLONE - " + preset.getName());
+        preset.setId(null);
+        preset.getTaskList().forEach(task -> task.setId(null));
+        return presetRepo.save(preset);
+    }
 }

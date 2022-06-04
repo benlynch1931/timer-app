@@ -30,7 +30,7 @@ public class ComponentUtils {
      * @param value whole value
      * @return 30% of whole value
      */
-    public static double thirtyPct(final long value) {
+    public static double thirtyPct(final double value) {
         return value * 0.3;
     }
     /**
@@ -77,7 +77,7 @@ public class ComponentUtils {
     }
 
     /**
-     * Sets Taskname-specific TextField width, height and coordinates
+     * Sets TaskName-specific TextField width, height and coordinates
      * @param component Component to set dimensions
      */
     public static void setTaskNameComponentDimensions(final TextField component) {
@@ -90,7 +90,7 @@ public class ComponentUtils {
     }
 
     /**
-     * Sets taskview-specific buttons width, height and coordinates
+     * Sets taskView-specific buttons width, height and coordinates
      * @param button Button to set dimensions
      */
     public static void setTaskButtonDimensions(final Button button) {
@@ -98,6 +98,8 @@ public class ComponentUtils {
         button.setMaxWidth(ComponentSize.TASK_BTN_WIDTH);
         button.setMaxHeight(ComponentSize.TASK_BTN_HEIGHT);
         button.setMinHeight(ComponentSize.TASK_BTN_HEIGHT);
+        // Brings button to front of z-index
+        button.setViewOrder(-4);
 
         if (button.getText().equals("SAVE")) {
             button.relocate(ComponentSize.SCREEN_WIDTH - ComponentSize.TASK_BTN_WIDTH, ComponentSize.TASK_BTN_TOP);
@@ -115,8 +117,13 @@ public class ComponentUtils {
         button.setMaxWidth(ComponentSize.TASK_BTN_WIDTH);
         button.setMaxHeight(ComponentSize.TASK_BTN_HEIGHT);
         button.setMinHeight(ComponentSize.TASK_BTN_HEIGHT);
+        // Brings button to front of z-index
+        button.setViewOrder(-4);
+
         if (button.getText().equals("EDIT")) {
             button.relocate(ComponentSize.SCREEN_WIDTH - ComponentSize.TASK_BTN_WIDTH, ComponentSize.TASKLIST_BTN_TOP);
+        } else if (button.getText().equals("CLONE")) {
+            button.relocate(ComponentSize.SCREEN_WIDTH - ComponentSize.TASK_BTN_WIDTH, ComponentSize.TASKLIST_BTN_TOP + ComponentSize.TASK_BTN_HEIGHT + 5);
         } else {
             button.relocate(0, ComponentSize.TASKLIST_BTN_TOP);
         }
