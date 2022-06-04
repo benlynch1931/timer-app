@@ -4,7 +4,6 @@ import com.ar.config.CellFactory;
 import com.ar.config.ComponentSize;
 import com.ar.dto.PresetDto;
 import com.ar.dto.TaskDto;
-import com.ar.mapper.TaskMapper;
 import com.ar.service.CurrentRecordViewService;
 import com.ar.service.PresetService;
 import com.ar.service.TaskService;
@@ -18,7 +17,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -66,8 +64,8 @@ public class TaskListController {
         label.setText(preset.getName());
     }
 
-    public void generatePresetList() {
-        table.relocate(0, ComponentSize.TASKLIST_TABLE_TOP);
+    public void generateTaskList() {
+        table.relocate(0, ComponentSize.LIST_TABLE_TOP);
         table.setTranslateX(ComponentSize.TABLE_MARGIN);
         table.setMaxWidth(ComponentSize.TABLE_WIDTH);
         table.setMinWidth(ComponentSize.TABLE_WIDTH);
@@ -95,7 +93,7 @@ public class TaskListController {
         preset = presetService.getPreset(presetId);
         setTitleInfo();
         setButtonInfo();
-        generatePresetList();
+        generateTaskList();
     }
 }
 

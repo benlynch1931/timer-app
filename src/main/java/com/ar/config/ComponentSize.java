@@ -44,6 +44,7 @@ public class ComponentSize {
     public static final double TASKLIST_TITLE_TOP = 74;
     public static final double TASKLIST_BTN_TOP = 68;
     public static final double TASKLIST_TITLE_SIZE = 20;
-    public static final double TASKLIST_TABLE_TOP = 124;
+    public static final double LIST_TABLE_TOP = 124;
+
 
 }
