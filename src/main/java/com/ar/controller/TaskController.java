@@ -5,6 +5,7 @@ import com.ar.config.FormatType;
 import com.ar.dto.TaskDto;
 import com.ar.mapper.TaskMapper;
 import com.ar.service.CurrentRecordViewService;
+import com.ar.service.PresetService;
 import com.ar.service.TaskService;
 import com.ar.utils.ComponentUtils;
 import com.ar.utils.ObjectUtils;
@@ -62,6 +63,7 @@ public class TaskController {
     private final HostServices hostServices;
 
     private final TaskService taskService;
+    private final PresetService presetService;
     private final CurrentRecordViewService currentRecordViewService;
     private final ScreenController screenController;
 
@@ -142,6 +144,7 @@ public class TaskController {
                 timeError.setText("");
                 updateTaskInfo();
                 taskService.saveOrUpdateTask(task);
+                presetService.updateDuration(task.getPresetId());
                 screenController.switchToTaskListView(event);
             }
         });
@@ -154,7 +157,7 @@ public class TaskController {
 
     @FXML
     public void initialize() {
-        task = TaskMapper.mapToDto(currentRecordViewService.getTaskRecord());
+        task = taskService.getTaskList(currentRecordViewService);
         setButtonInfo();
         setComponentDimensions();
         setTaskInfo();

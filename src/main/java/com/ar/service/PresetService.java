@@ -3,6 +3,7 @@ package com.ar.service;
 import com.ar.config.UpdateType;
 import com.ar.dto.PresetDto;
 import com.ar.entity.Preset;
+import com.ar.entity.Task;
 import com.ar.mapper.PresetMapper;
 import com.ar.repository.ActiveTaskRepo;
 import com.ar.repository.PresetRepo;
@@ -93,18 +94,6 @@ public class PresetService {
         }, 1_000, 1_000);
     }
 
-//    public void setTaskScene(Scene currentScene) {
-//        FXMLLoader taskFXML = new FXMLLoader(getClass().getResource("classpath:/task.fxml"));
-//        taskFXML.setControllerFactory(applicationContext::getBean);
-//        Scene scene = new Scene(currentScene.getRoot(),  414, 896);
-//        scene.setFill(Color.web("#E3E3E3"));
-//    }
-
-//    public void addTask(int presetIdx, Task newTask) {
-//        presetList.get(presetIdx).getTaskList().add(newTask);
-//        updateDuration(presetList.get(presetIdx), newTask.getDuration(), UpdateType.ADD);
-//        savePreset(presetList.get(presetIdx));
-//    }
 //
 //    public void removeTask(int presetIdx , Task taskToRemove) {
 //        presetList.get(presetIdx).getTaskList().remove(taskToRemove);
@@ -117,12 +106,14 @@ public class PresetService {
 //        savePreset(presetList.get(presetIdx));
 //    }
 
-    public void updateDuration(Preset preset, BigInteger duration, UpdateType updateType) {
-        if (updateType == UpdateType.ADD) {
-            preset.setDuration(preset.getDuration().add(duration));
-        } else {
-            preset.setDuration(preset.getDuration().subtract(duration));
+    public void updateDuration(final BigInteger presetId) {
+        final Preset preset = presetRepo.getById(presetId);
+        long duration = 0L;
+        for (Task task : preset.getTaskList()) {
+            duration += task.getDuration().longValue();
         }
+        preset.setDuration(BigInteger.valueOf(duration));
+        presetRepo.save(preset);
     }
 
     public void savePreset(Preset presetToUpdate) {

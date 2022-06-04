@@ -36,9 +36,13 @@ public class TaskService {
 
 
 
-//    public ObservableList<TaskDto> getTaskList(BigInteger presetId) {
-//        return formatList(taskRepo.getByPresetId(presetId));
+//    public ObservableList<TaskDto> getTaskList(CurrentRecordViewService currentRecordViewService) {
+//
 //    }
+
+    public TaskDto getTaskList(CurrentRecordViewService currentRecordViewService) {
+        return TaskMapper.mapToDto(currentRecordViewService.getTaskRecord());
+    }
 
     public void saveOrUpdateTask(TaskDto task) {
         taskRepo.save(TaskMapper.mapToEntity(task));
