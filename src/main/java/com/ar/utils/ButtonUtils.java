@@ -34,8 +34,8 @@ public class ButtonUtils {
                 // TODO: View Create Preset
             } else {
                 final boolean updatedRecord = currentRecordViewService.updateRecord("TASKLIST", currentPreset.getId());
-                screenController.switchToTaskListView(event);
-
+//                screenController.switchToTaskListView(event);
+                screenController.switchToPresetView(event);
             }
         });
         presetButton.setText(currentPreset.getName());

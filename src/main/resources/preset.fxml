@@ -1,0 +1,26 @@
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<VBox xmlns="http://javafx.com/javafx/0.0.121"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.ar.controller.PresetController">
+<!--    <children>-->
+
+        <AnchorPane fx:id="buttonBox">
+                <Button fx:id="save" />
+                <Button fx:id="back" />
+        </AnchorPane>
+
+        <AnchorPane fx:id="nameBox">
+                <TextField fx:id="presetName" />
+                <Label fx:id="nameError" />
+        </AnchorPane>
+
+        <AnchorPane fx:id="taskListBox">
+                <TableView fx:id="table" />
+        </AnchorPane>
+<!--    </children>-->
+</VBox>

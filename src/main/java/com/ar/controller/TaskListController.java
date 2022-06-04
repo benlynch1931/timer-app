@@ -2,6 +2,7 @@ package com.ar.controller;
 
 import com.ar.config.CellFactory;
 import com.ar.config.ComponentSize;
+import com.ar.config.DisplayType;
 import com.ar.dto.PresetDto;
 import com.ar.dto.TaskDto;
 import com.ar.service.CurrentRecordViewService;
@@ -83,7 +84,7 @@ public class TaskListController {
         c2.setCellFactory(cellFactory.durationText());
 
         table.getColumns().addAll(c1, c2);
-        table.setItems(TaskUtils.formatList(preset.getTaskList()));
+        table.setItems(TaskUtils.formatList(preset.getTaskList(), DisplayType.ADD));
     }
 
     @FXML

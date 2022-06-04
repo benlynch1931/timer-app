@@ -74,8 +74,6 @@ public class TaskController {
         buttonBox.relocate(0, ComponentSize.TASK_BUTTON_BOX_TOP);
         nameBox.relocate(0, ComponentSize.TASK_NAME_BOX_TOP);
         durationPane.relocate(0, ComponentSize.TASK_DURATION_PANE_TOP);
-
-
     }
 
     private void setTaskInfo() {
@@ -141,6 +139,7 @@ public class TaskController {
             }
             if (timeValid & nameValid) {
                 timeError.setText("");
+                nameError.setText("");
                 updateTaskInfo();
                 taskService.saveOrUpdateTask(task);
                 presetService.updateDuration(task.getPresetId());
@@ -158,9 +157,9 @@ public class TaskController {
     public void initialize() {
         task = taskService.getTaskForDisplay(currentRecordViewService);
         setButtonInfo();
+        setContainerMeasures();
         setComponentDimensions();
         setTaskInfo();
-        setContainerMeasures();
         setTimeErrorLabel();
         setNameErrorLabel();
     }

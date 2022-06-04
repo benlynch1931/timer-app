@@ -32,6 +32,10 @@ public class ScreenController {
         switchScene(event, "/task.fxml");
     }
 
+    public void switchToPresetView(final ActionEvent event) {
+        switchScene(event, "/preset.fxml");
+    }
+
     public void switchToPresetListView(final ActionEvent event) {
         switchScene(event, "/presetList.fxml");
     }

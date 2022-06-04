@@ -14,6 +14,7 @@ public class ComponentSize {
     public static final int TABLE_WIDTH = SCREEN_WIDTH - (2*TABLE_MARGIN);
     public static final int COL_PRESET_WIDTH = 210;
     public static final int COL_OTHER_WIDTH = (TABLE_WIDTH - COL_PRESET_WIDTH) / 2;
+    public static final int COL_DELETE_WIDTH = 20;
     
     public static final int TASK_DURATION_MARGIN = 69;
     public static final int TASK_DURATION_FIELDS = 69;
@@ -22,11 +23,14 @@ public class ComponentSize {
     public static final int TASK_ERROR_SIZE = 14;
 
     public static final double TASK_BUTTON_BOX_TOP = 89.6;
+    public static final double PRESET_BUTTON_BOX_TOP = 89.6;
     public static final double TASK_BOX_HGT = 64;
     public static final double TASK_DURATION_PANE_HGT = TASK_BOX_HGT + TASK_ERROR_SIZE;
     public static final double TASK_NAME_BOX_HGT = TASK_BOX_HGT + TASK_ERROR_SIZE;
     public static final double TASK_NAME_BOX_TOP = 224;
+    public static final double PRESET_NAME_BOX_TOP = 180;
     public static final double TASK_DURATION_PANE_TOP = 384;
+    public static final double PRESET_TASKLIST_BOX_TOP = 280;
 
     public static final int TASK_NAME_FIELD_WIDTH = SCREEN_WIDTH / 3 * 2;
     public static final int TASK_NAME_FIELD_MARGIN = TASK_NAME_FIELD_WIDTH / 4;

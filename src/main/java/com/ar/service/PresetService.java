@@ -1,7 +1,7 @@
 package com.ar.service;
 
-import com.ar.config.UpdateType;
 import com.ar.dto.PresetDto;
+import com.ar.dto.TaskDto;
 import com.ar.entity.Preset;
 import com.ar.entity.Task;
 import com.ar.mapper.PresetMapper;
@@ -11,11 +11,11 @@ import com.ar.utils.PresetUtils;
 import com.ar.utils.TaskUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import lombok.Getter;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -51,7 +51,7 @@ public class PresetService {
     private ObservableList<PresetDto> formatList(List<Preset> presetList) {
         ObservableList<PresetDto> observableList = FXCollections.observableArrayList();
         presetList.forEach(preset -> observableList.add(PresetMapper.mapToDto(preset)));
-        observableList.add(PresetDto.builder().name("New Preset").build());
+        observableList.add(PresetDto.builder().name("New Preset").taskList(new ArrayList<>()).build());
         return observableList;
     }
 
@@ -115,9 +115,24 @@ public class PresetService {
         final List<Task> taskList = preset.getTaskList();
         taskList.sort((o1, o2) -> o2.getDuration().subtract(o1.getDuration()).intValue());
         preset.setDuration(taskList.get(0).getDuration());
+        presetRepo.save(preset);
+    }
+
+    /**
+     * Method to update preset with its new duration time, being the max duration of a task in the preset
+     * @param taskList list of task to get max duration from
+     * @return duration of preset
+     */
+    public BigInteger getPresetNewDuration(final List<TaskDto> taskList) {
+        taskList.sort((o1, o2) -> o2.getDuration().subtract(o1.getDuration()).intValue());
+        return taskList.get(0).getDuration();
     }
 
     public void savePreset(Preset presetToUpdate) {
         presetRepo.save(presetToUpdate);
+    }
+
+    public void saveOrUpdateTask(final PresetDto preset) {
+        presetRepo.save(PresetMapper.mapToEntity(preset));
     }
 }

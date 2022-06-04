@@ -33,4 +33,18 @@ public class PresetMapper {
 
         return presetDto;
     }
+
+    /**
+     * Maps Preset Dto to entity for save or update in database
+     * @param presetDto dto to get details from
+     * @return entity for saving
+     */
+    public static Preset mapToEntity(final PresetDto presetDto) {
+        final Preset preset = new Preset();
+        preset.setId(presetDto.getId());
+        preset.setName(presetDto.getName());
+        preset.setDuration(presetDto.getDuration());
+        preset.setTaskList(TaskMapper.mapToEntity(presetDto.getTaskList()));
+        return preset;
+    }
 }

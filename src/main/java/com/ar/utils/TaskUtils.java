@@ -1,5 +1,6 @@
 package com.ar.utils;
 
+import com.ar.config.DisplayType;
 import com.ar.config.FormatType;
 import com.ar.config.TimeValues;
 import com.ar.dto.PresetDto;
@@ -38,10 +39,12 @@ public class TaskUtils {
      * @param taskList list to format
      * @return JavaFx compatible list
      */
-    public static ObservableList<TaskDto> formatList(List<TaskDto> taskList) {
+    public static ObservableList<TaskDto> formatList(List<TaskDto> taskList, DisplayType displayType) {
         ObservableList<TaskDto> observableList = FXCollections.observableArrayList();
         observableList.addAll(taskList);
-        observableList.add(TaskDto.builder().name("New Task").build());
+        if (displayType == DisplayType.ADD) {
+            observableList.add(TaskDto.builder().name("New Task").build());
+        }
         return observableList;
     }
 
