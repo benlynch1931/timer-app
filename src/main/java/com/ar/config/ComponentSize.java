@@ -45,30 +45,11 @@ public class ComponentSize {
     public static final double TASK_BTN_TOP = 0.25 * TASK_BOX_HGT;
 
 
-    public static final double TASKLIST_TITLE_TOP = 43;
     public static final double TASKLIST_BTN_TOP = 68;
-    public static final double TASKLIST_TITLE_SIZE = 20;
-    public static final double TASKLIST_DURATION_SIZE = 14;
 
     public static final double LIST_TABLE_TOP = 280;
-    public static final double TASKLIST_TABLE_TOP = 200;
-    public static final double TASKLIST_DURATION_TOP = 110;
 
-
-
-
-
-    public static final double NAME_BOX_FIELD_SPACER = 10;
-//    public static final double NAME_TEXT_SIZE = 20;
-    public static final double NAME_FIELD_TEXT_SIZE = 14;
-
-
-
-    public static final double NAME_FIELD_BOX_HGT = NAME_BOX_FIELD_SPACER + TASK_ERROR_SIZE + TASKLIST_TITLE_SIZE;
-
-
-
-
+// ----------------------------------------------------------------------------------------------------------------------------
 
 
     public static double VIEW_BTN_HGT = 32;

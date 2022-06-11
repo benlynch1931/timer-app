@@ -33,11 +33,11 @@ import org.springframework.stereotype.Component;
 public class TaskController {
 
     @FXML
-    private AnchorPane buttonBox;
+    private AnchorPane paneViewBtn;
     @FXML
-    private AnchorPane durationPane;
+    private AnchorPane paneDuration;
     @FXML
-    private AnchorPane nameBox;
+    private AnchorPane paneNameField;
 
     @FXML
     private TextField taskName;
@@ -69,13 +69,13 @@ public class TaskController {
     private final ScreenController screenController;
 
     private void setContainerMeasures() {
-        ComponentUtils.setTaskContainerSize(buttonBox);
-        ComponentUtils.setTaskContainerSize(nameBox, ComponentSize.TASK_NAME_BOX_HGT);
-        ComponentUtils.setTaskContainerSize(durationPane, ComponentSize.TASK_DURATION_PANE_HGT);
+        ComponentUtils.setTaskContainerSize(paneViewBtn);
+        ComponentUtils.setTaskContainerSize(paneNameField, ComponentSize.TASK_NAME_BOX_HGT);
+        ComponentUtils.setTaskContainerSize(paneDuration, ComponentSize.TASK_DURATION_PANE_HGT);
 
-        buttonBox.relocate(0, ComponentSize.TASK_BUTTON_BOX_TOP);
-        nameBox.relocate(0, ComponentSize.TASK_NAME_BOX_TOP);
-        durationPane.relocate(0, ComponentSize.TASK_DURATION_PANE_TOP);
+        paneViewBtn.relocate(0, ComponentSize.TASK_BUTTON_BOX_TOP);
+        paneNameField.relocate(0, ComponentSize.TASK_NAME_BOX_TOP);
+        paneDuration.relocate(0, ComponentSize.TASK_DURATION_PANE_TOP);
     }
 
     private void setTaskInfo() {

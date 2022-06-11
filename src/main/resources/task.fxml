@@ -4,17 +4,17 @@
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.ar.controller.TaskController">
 
-        <AnchorPane fx:id="buttonBox">
+        <AnchorPane fx:id="paneViewBtn">
                 <Button fx:id="save" />
                 <Button fx:id="back" />
         </AnchorPane>
 
-        <AnchorPane fx:id="nameBox">
+        <AnchorPane fx:id="paneNameField">
                 <TextField fx:id="taskName" />
                 <Label fx:id="nameError" />
         </AnchorPane>
 
-        <AnchorPane fx:id="durationPane">
+        <AnchorPane fx:id="paneDuration">
                 <TextField fx:id="hours" />
                 <TextField fx:id="minutes" />
                 <TextField fx:id="seconds" />
