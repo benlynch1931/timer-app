@@ -74,12 +74,12 @@ public class ComponentUtils {
      * @param timeType enum representing order of HH->MM->SS
      */
     public static void setDurationComponentDimensions(final TextField component, final TimeType timeType) {
-        component.setMaxWidth(ComponentSize.TASK_DURATION_FIELDS);
-        component.setMaxWidth(ComponentSize.TASK_DURATION_FIELDS);
+//        component.setMaxWidth(ComponentSize.TASK_DURATION_FIELDS);
+//        component.setMaxWidth(ComponentSize.TASK_DURATION_FIELDS);
         component.setMinHeight(ComponentSize.TASK_TEXT_FIELD_HGT);
 
-        int xCoordinate = (ComponentSize.TASK_DURATION_MARGIN) + (ComponentSize.TASK_DURATION_FIELDS * timeType.times()) + (ComponentSize.TASK_DURATION_SPACER * timeType.times());
-        component.relocate(xCoordinate, ComponentSize.TASK_TEXT_FIELD_TOP);
+//        int xCoordinate = (ComponentSize.TASK_DURATION_MARGIN) + (ComponentSize.TASK_DURATION_FIELDS * timeType.times()) + (ComponentSize.TASK_DURATION_SPACER * timeType.times());
+//        component.relocate(xCoordinate, ComponentSize.TASK_TEXT_FIELD_TOP);
     }
 
     /**
@@ -151,6 +151,15 @@ public class ComponentUtils {
         button.setMinHeight(dimensions.getHeight());
         button.relocate(dimensions.getX(), dimensions.getY());
         button.setViewOrder(dimensions.getZ());
+    }
+
+    public static void setTextFieldDimensions(final TextField field, final Dimensions dimensions) {
+        field.setMinWidth(dimensions.getWidth());
+        field.setMaxWidth(dimensions.getWidth());
+        field.setMaxHeight(dimensions.getHeight());
+        field.setMinHeight(dimensions.getHeight());
+        field.relocate(dimensions.getX(), dimensions.getY());
+        field.setViewOrder(dimensions.getZ());
     }
 
     public static void setPaneDimensions(final AnchorPane pane, final Dimensions dimensions) {

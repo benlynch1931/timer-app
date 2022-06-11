@@ -17,8 +17,7 @@ public class ComponentSize {
     public static final int COL_DELETE_WIDTH = 30;
     
     public static final int TASK_DURATION_MARGIN = 69;
-    public static final int TASK_DURATION_FIELDS = 69;
-    public static final int TASK_DURATION_SPACER = 43;
+
 
     public static final int TASK_ERROR_SIZE = 14;
 
@@ -71,15 +70,14 @@ public class ComponentSize {
     public static double PANE_TABLE_TOP = 200;
     public static double PANE_TABLE_HGT = SCREEN_HEIGHT - PANE_TABLE_TOP;
     public static double PANE_TABLE_LEFT = 0.5 * (SCREEN_WIDTH - PANE_TABLE_WIDTH);
-//    public static double TABLE_WIDTH = PANE_TABLE_WIDTH - (2 * PANE_TABLE_PADDING);
     public static double TABLE_HGT = PANE_TABLE_HGT;
     public static double TABLE_TOP = 0;
     public static double TABLE_LEFT = PANE_TABLE_PADDING;
 
-    public static double NAME_FIELD_WIDTH;
-    public static double NAME_FIELD_HGT;
-    public static double NAME_FIELD_TOP;
     public static double PANE_NAME_FIELD_WIDTH = SCREEN_WIDTH;
+    public static double NAME_FIELD_WIDTH = PANE_NAME_FIELD_WIDTH - (2 * VIEW_BTN_WIDTH);
+    public static double NAME_FIELD_HGT = 24;
+    public static double NAME_FIELD_TOP = 0;
     public static double NAME_FIELD_LEFT = 0.5 * (PANE_NAME_FIELD_WIDTH - NAME_FIELD_WIDTH);
     public static double NAME_FIELD_SPACER = 5;
     public static double NAME_ERROR_WIDTH = SCREEN_WIDTH;
@@ -89,32 +87,41 @@ public class ComponentSize {
     public static double NAME_ERROR_TOP = PANE_NAME_FIELD_HGT - NAME_ERROR_TEXT_SIZE;
 
     public static double NAME_ERROR_LEFT = 0.5 * (SCREEN_WIDTH - NAME_ERROR_WIDTH);
-    public static double PANE_NAME_FIELD_TOP;
+    public static double PANE_NAME_FIELD_TOP = VIEW_BTN_ROW_2_TOP + VIEW_BTN_HGT;
     public static double PANE_NAME_FIELD_LEFT = 0.5 * (SCREEN_WIDTH - PANE_NAME_FIELD_WIDTH);
 
 
+    public static double DURATION_FIELD_ERROR_SPACER = 5;
+    public static double TIME_ERROR_TEXT_SIZE = 14;
+    public static double DURATION_FIELD_HGT = 24;
+    public static double PANE_DURATION_WIDTH = SCREEN_WIDTH;
+    public static double PANE_DURATION_HGT = DURATION_FIELD_HGT + TIME_ERROR_TEXT_SIZE + DURATION_FIELD_ERROR_SPACER;
+    public static double TIME_ERROR_WIDTH = PANE_DURATION_WIDTH;
+    public static double TIME_ERROR_TOP = PANE_DURATION_HGT - TIME_ERROR_TEXT_SIZE;
+    public static double TIME_ERROR_LEFT = SCREEN_WIDTH - TIME_ERROR_WIDTH;
 
-    public static double PANE_DURATION_HGT;
-    public static double PANE_DURATION_WIDTH;
-    public static double PANE_DURATION_TOP;
+    public static double PANE_DURATION_TOP = PANE_NAME_FIELD_TOP + PANE_NAME_FIELD_HGT + 30;
     public static double PANE_DURATION_LEFT = 0.5 * (SCREEN_WIDTH - PANE_DURATION_WIDTH);
 
-//    public static double HOURS_FIELD_TEXT_SIZE;
-    public static double HOURS_FIELD_WIDTH;
-    public static double HOURS_FIELD_TOP;
-    public static double HOURS_FIELD_LEFT;
-//    public static double MINUTES_FIELD_TEXT_SIZE;
-    public static double MINUTES_FIELD_WIDTH;
-    public static double MINUTES_FIELD_TOP;
-    public static double MINUTES_FIELD_LEFT;
-//    public static double SECONDS_FIELD_TEXT_SIZE;
-    public static double SECONDS_FIELD_WIDTH;
-    public static double SECONDS_FIELD_TOP;
-    public static double SECONDS_FIELD_LEFT;
-    public static double TIME_ERROR_TEXT_SIZE = 14;
-    public static double TIME_ERROR_WIDTH;
-    public static double TIME_ERROR_TOP = PANE_DURATION_HGT - TIME_ERROR_TEXT_SIZE;
-    public static double TIME_ERROR_LEFT;
+    public static double DURATION_FIELD_TOP = 0;
+    public static final int DURATION_FIELD_WIDTH = 69;
+    public static final int DURATION_FIELD_SPACER = 43;
+
+    public static double HOURS_FIELD_HGT = DURATION_FIELD_HGT;
+    public static double HOURS_FIELD_WIDTH = DURATION_FIELD_WIDTH;
+    public static double HOURS_FIELD_TOP = DURATION_FIELD_TOP;
+    public static double HOURS_FIELD_LEFT = 69;
+
+    public static double MINUTES_FIELD_HGT = DURATION_FIELD_HGT;
+    public static double MINUTES_FIELD_WIDTH = DURATION_FIELD_WIDTH;
+    public static double MINUTES_FIELD_TOP = DURATION_FIELD_TOP;
+    public static double MINUTES_FIELD_LEFT = HOURS_FIELD_LEFT + DURATION_FIELD_WIDTH + DURATION_FIELD_SPACER;
+
+    public static double SECONDS_FIELD_HGT = DURATION_FIELD_HGT;
+    public static double SECONDS_FIELD_WIDTH = DURATION_FIELD_WIDTH;
+    public static double SECONDS_FIELD_TOP = DURATION_FIELD_TOP;
+    public static double SECONDS_FIELD_LEFT = MINUTES_FIELD_LEFT + DURATION_FIELD_WIDTH + DURATION_FIELD_SPACER;
+
 
 
     public static double PANE_TITLE_HGT;

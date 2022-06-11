@@ -1,6 +1,7 @@
 package com.ar.controller;
 
 import com.ar.config.ComponentSize;
+import com.ar.config.Dimensions;
 import com.ar.config.FormatType;
 import com.ar.config.TimeType;
 import com.ar.dto.TaskDto;
@@ -59,24 +60,13 @@ public class TaskController {
     @FXML
     private Label nameError;
 
+
     private TaskDto task;
-
-    private final HostServices hostServices;
-
     private final TaskService taskService;
     private final PresetService presetService;
     private final CurrentRecordViewService currentRecordViewService;
     private final ScreenController screenController;
 
-    private void setContainerMeasures() {
-        ComponentUtils.setTaskContainerSize(paneViewBtn);
-        ComponentUtils.setTaskContainerSize(paneNameField, ComponentSize.TASK_NAME_BOX_HGT);
-        ComponentUtils.setTaskContainerSize(paneDuration, ComponentSize.TASK_DURATION_PANE_HGT);
-
-        paneViewBtn.relocate(0, ComponentSize.TASK_BUTTON_BOX_TOP);
-        paneNameField.relocate(0, ComponentSize.TASK_NAME_BOX_TOP);
-        paneDuration.relocate(0, ComponentSize.TASK_DURATION_PANE_TOP);
-    }
 
     private void setTaskInfo() {
         taskName.setPromptText("Task Name");
@@ -98,26 +88,25 @@ public class TaskController {
     }
 
     private void setComponentDimensions() {
-        ComponentUtils.setTaskNameComponentDimensions(taskName);
-        ComponentUtils.setDurationComponentDimensions(hours, TimeType.HOUR);
-        ComponentUtils.setDurationComponentDimensions(minutes, TimeType.MIN);
-        ComponentUtils.setDurationComponentDimensions(seconds, TimeType.SEC);
+        ComponentUtils.setPaneDimensions(paneViewBtn, Dimensions.PANE_VIEW_BTN);
+        ComponentUtils.setPaneDimensions(paneNameField, Dimensions.PANE_NAME_FIELD);
+        ComponentUtils.setPaneDimensions(paneDuration, Dimensions.PANE_DURATION_FIELD);
+
+        ComponentUtils.setTextFieldDimensions(hours, Dimensions.HOURS_FIELD);
+        ComponentUtils.setTextFieldDimensions(minutes, Dimensions.MINUTES_FIELD);
+        ComponentUtils.setTextFieldDimensions(seconds, Dimensions.SECONDS_FIELD);
+        ComponentUtils.setLabelDimensions(nameError, Dimensions.NAME_ERROR);
+        ComponentUtils.setLabelDimensions(timeError, Dimensions.TIME_ERROR);
+
+        ComponentUtils.setTextFieldDimensions(taskName, Dimensions.NAME_FIELD);
+
+        ComponentUtils.setButtonDimensions(back, Dimensions.BACK_BTN);
+        ComponentUtils.setButtonDimensions(save, Dimensions.SAVE_BTN);
     }
 
-    private void setTimeErrorLabel() {
-        setErrorLabel(timeError, ComponentSize.TASK_TIME_ERROR_TOP);
-    }
-
-    private void setNameErrorLabel() {
-        setErrorLabel(nameError, ComponentSize.TASK_NAME_ERROR_TOP);
-    }
-
-    private void setErrorLabel(final Label label, final double topMargin) {
-        label.setTextFill(Paint.valueOf("#FF0000"));
-        label.setFont(new Font(ComponentSize.TASK_ERROR_SIZE));
-        label.setAlignment(Pos.CENTER);
-        label.setMinWidth(ComponentSize.SCREEN_WIDTH);
-        label.relocate(0, topMargin);
+    private void setErrorLabelColour() {
+        nameError.setTextFill(Paint.valueOf("#FF0000"));
+        timeError.setTextFill(Paint.valueOf("#FF0000"));
     }
 
     private void updateTaskInfo() {
@@ -128,8 +117,6 @@ public class TaskController {
     private void setButtonInfo() {
         save.setText("SAVE");
         back.setText("BACK");
-        ComponentUtils.setTaskButtonDimensions(save);
-        ComponentUtils.setTaskButtonDimensions(back);
         save.setOnAction(event -> {
             boolean timeValid = TimeValidator.validateTimeValues(getTimeValues());
             boolean nameValid = NameValidator.validateName(taskName.getText());
@@ -159,11 +146,9 @@ public class TaskController {
     public void initialize() {
         task = taskService.getTaskForDisplay(currentRecordViewService);
         setButtonInfo();
-        setContainerMeasures();
         setComponentDimensions();
         setTaskInfo();
-        setTimeErrorLabel();
-        setNameErrorLabel();
+        setErrorLabelColour();
     }
 }
 

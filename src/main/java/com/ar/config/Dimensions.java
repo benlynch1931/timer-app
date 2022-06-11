@@ -67,6 +67,22 @@ public enum Dimensions {
     DURATION_LABEL(
             ComponentSize.DURATION_LEFT, ComponentSize.DURATION_TOP, 0,
             ComponentSize.DURATION_WIDTH, ComponentSize.DURATION_TEXT_SIZE
+    ),
+    HOURS_FIELD(
+            ComponentSize.HOURS_FIELD_LEFT, ComponentSize.HOURS_FIELD_TOP, 0,
+            ComponentSize.HOURS_FIELD_WIDTH, ComponentSize.HOURS_FIELD_HGT
+    ),
+    MINUTES_FIELD(
+            ComponentSize.MINUTES_FIELD_LEFT, ComponentSize.MINUTES_FIELD_TOP, 0,
+            ComponentSize.MINUTES_FIELD_WIDTH, ComponentSize.MINUTES_FIELD_HGT
+    ),
+    SECONDS_FIELD(
+            ComponentSize.SECONDS_FIELD_LEFT, ComponentSize.SECONDS_FIELD_TOP, 0,
+            ComponentSize.SECONDS_FIELD_WIDTH, ComponentSize.SECONDS_FIELD_HGT
+    ),
+    TIME_ERROR(
+            ComponentSize.TIME_ERROR_LEFT, ComponentSize.TIME_ERROR_TOP, 0,
+            ComponentSize.TIME_ERROR_WIDTH, ComponentSize.TIME_ERROR_TEXT_SIZE
     )
     
     ;
