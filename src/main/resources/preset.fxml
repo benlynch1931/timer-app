@@ -7,20 +7,18 @@
 <AnchorPane xmlns="http://javafx.com/javafx/0.0.121"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.ar.controller.PresetController">
-<!--    <children>-->
 
-        <AnchorPane fx:id="buttonBox">
+        <AnchorPane fx:id="paneViewBtn">
                 <Button fx:id="save" />
                 <Button fx:id="back" />
         </AnchorPane>
 
-        <AnchorPane fx:id="nameBox">
+        <AnchorPane fx:id="paneNameField">
                 <TextField fx:id="presetName" />
                 <Label fx:id="nameError" />
         </AnchorPane>
 
-<!--        <AnchorPane fx:id="taskListBox">-->
+        <AnchorPane fx:id="paneTable">
                 <TableView fx:id="table" />
-<!--        </AnchorPane>-->
-<!--    </children>-->
+        </AnchorPane>
 </AnchorPane>

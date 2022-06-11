@@ -36,11 +36,11 @@ public class PresetController {
     private TableView<TaskDto> table = new TableView<>();
 
     @FXML
-    private AnchorPane buttonBox;
+    private AnchorPane paneViewBtn;
     @FXML
-    private AnchorPane taskListBox;
+    private AnchorPane paneTable;
     @FXML
-    private AnchorPane nameBox;
+    private AnchorPane paneNameField;
     @FXML
     private TextField presetName;
     @FXML
@@ -127,13 +127,13 @@ public class PresetController {
     }
 
     private void setContainerMeasures() {
-        ComponentUtils.setTaskContainerSize(buttonBox);
-        ComponentUtils.setTaskContainerSize(nameBox, ComponentSize.TASK_NAME_BOX_HGT);
-//        ComponentUtils.setTaskContainerSize(taskListBox, ComponentSize.TASK_DURATION_PANE_HGT);
+        ComponentUtils.setTaskContainerSize(paneViewBtn);
+        ComponentUtils.setTaskContainerSize(paneNameField, ComponentSize.TASK_NAME_BOX_HGT);
+//        ComponentUtils.setTaskContainerSize(paneTable, ComponentSize.TASK_DURATION_PANE_HGT);
 
-        buttonBox.relocate(0, ComponentSize.PRESET_BUTTON_BOX_TOP);
-        nameBox.relocate(0, ComponentSize.PRESET_NAME_BOX_TOP);
-//        taskListBox.relocate(0, ComponentSize.PRESET_TASKLIST_BOX_TOP);
+        paneViewBtn.relocate(0, ComponentSize.PRESET_BUTTON_BOX_TOP);
+        paneNameField.relocate(0, ComponentSize.PRESET_NAME_BOX_TOP);
+//        paneTable.relocate(0, ComponentSize.PRESET_TASKLIST_BOX_TOP);
     }
 
     @FXML
