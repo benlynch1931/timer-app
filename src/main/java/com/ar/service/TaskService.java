@@ -1,18 +1,12 @@
 package com.ar.service;
 
 import com.ar.dto.TaskDto;
-import com.ar.entity.Task;
 import com.ar.mapper.TaskMapper;
 import com.ar.repository.PresetRepo;
 import com.ar.repository.TaskRepo;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import lombok.AllArgsConstructor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-
-import java.math.BigInteger;
-import java.util.List;
 
 /**
  * @author Ben Lynch

@@ -12,15 +12,11 @@ import com.ar.utils.ComponentUtils;
 import com.ar.utils.ObjectUtils;
 import com.ar.utils.TaskUtils;
 import com.ar.validator.NameValidator;
-import javafx.application.HostServices;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

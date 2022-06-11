@@ -1,28 +1,22 @@
 package com.ar.controller;
 
-import com.ar.config.ComponentSize;
 import com.ar.config.Dimensions;
 import com.ar.config.FormatType;
-import com.ar.config.TimeType;
 import com.ar.dto.TaskDto;
 import com.ar.service.CurrentRecordViewService;
 import com.ar.service.PresetService;
 import com.ar.service.TaskService;
 import com.ar.utils.ComponentUtils;
 import com.ar.utils.ObjectUtils;
-import com.ar.utils.TaskUtils;
 import com.ar.utils.TimeUtils;
 import com.ar.validator.NameValidator;
 import com.ar.validator.TimeValidator;
-import javafx.application.HostServices;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

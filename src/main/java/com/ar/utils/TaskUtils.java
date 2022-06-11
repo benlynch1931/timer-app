@@ -1,18 +1,13 @@
 package com.ar.utils;
 
 import com.ar.config.DisplayType;
-import com.ar.config.FormatType;
-import com.ar.config.TimeValues;
 import com.ar.dto.PresetDto;
 import com.ar.dto.TaskDto;
 import com.ar.entity.ActiveTask;
-import com.ar.entity.Task;
-import com.ar.mapper.TaskMapper;
 import com.ar.repository.ActiveTaskRepo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
