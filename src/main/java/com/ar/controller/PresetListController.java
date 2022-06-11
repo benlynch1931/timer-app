@@ -2,16 +2,16 @@ package com.ar.controller;
 
 import com.ar.config.CellFactory;
 import com.ar.config.ComponentSize;
+import com.ar.config.Dimensions;
 import com.ar.dto.PresetDto;
 import com.ar.service.PresetService;
-import javafx.application.HostServices;
+import com.ar.utils.ComponentUtils;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.AnchorPane;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -23,28 +23,20 @@ import org.springframework.stereotype.Component;
 public class PresetListController {
 
     @FXML
+    private AnchorPane paneTable;
+    @FXML
+    private AnchorPane paneTitleLabel;
+
+    @FXML
     private TableView<PresetDto> table = new TableView<>();
-
     @FXML
-    private Label label;
-    @FXML
-    private Button button;
-
-    @FXML
-    private VBox vBox;
-
-    private final HostServices hostServices;
+    private Label title;
 
     private final PresetService presetService;
 
     private final CellFactory cellFactory;
 
-    public void generatePresetList() {
-        table.relocate(0, ComponentSize.LIST_TABLE_TOP);
-        table.setTranslateX(ComponentSize.TABLE_MARGIN);
-        table.setMaxWidth(ComponentSize.TABLE_WIDTH);
-        table.setMinWidth(ComponentSize.TABLE_WIDTH);
-        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    private void generatePresetList() {
         TableColumn c1 = new TableColumn("Name");
         TableColumn c2 = new TableColumn("Ready At");
         TableColumn c3 = new TableColumn(""); // Start
@@ -65,9 +57,18 @@ public class PresetListController {
         table.setItems(presetService.getPresetListForDisplay());
     }
 
+    private void setComponentDimensions() {
+        ComponentUtils.setPaneDimensions(paneTable, Dimensions.PANE_TABLE);
+        ComponentUtils.setPaneDimensions(paneTitleLabel, Dimensions.PANE_TITLE);
+
+        ComponentUtils.setTableDimensions(table, Dimensions.TABLE);
+        ComponentUtils.setLabelDimensions(title, Dimensions.TITLE);
+    }
+
     @FXML
     public void initialize() {
-        this.button.setOnAction(actionEvent -> this.label.setText(this.hostServices.getDocumentBase()));
+        setComponentDimensions();
+        title.setText("Timer Application BETA");
         generatePresetList();
     }
 }

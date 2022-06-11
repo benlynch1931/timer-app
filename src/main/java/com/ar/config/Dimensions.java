@@ -30,6 +30,10 @@ public enum Dimensions {
             ComponentSize.PANE_TITLE_LEFT, ComponentSize.PANE_TITLE_TOP, 0,
             ComponentSize.PANE_TITLE_WIDTH, ComponentSize.PANE_TITLE_HGT
     ),
+    TITLE(
+            ComponentSize.TITLE_LEFT, ComponentSize.TITLE_TOP, 0,
+            ComponentSize.TITLE_WIDTH, ComponentSize.TITLE_TEXT_SIZE
+    ),
     PANE_NAME_LABEL(
             ComponentSize.PANE_NAME_LABEL_LEFT, ComponentSize.PANE_NAME_LABEL_TOP, 0,
             ComponentSize.PANE_NAME_LABEL_WIDTH, ComponentSize.PANE_NAME_LABEL_HGT

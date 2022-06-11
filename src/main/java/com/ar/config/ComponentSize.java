@@ -124,10 +124,16 @@ public class ComponentSize {
 
 
 
-    public static double PANE_TITLE_HGT;
-    public static double PANE_TITLE_WIDTH;
-    public static double PANE_TITLE_TOP;
+    public static double TITLE_TEXT_SIZE = 32;
+    public static double PANE_TITLE_HGT = TITLE_TEXT_SIZE;
+    public static double PANE_TITLE_WIDTH = SCREEN_WIDTH;
+    public static double PANE_TITLE_TOP = 68;
     public static double PANE_TITLE_LEFT = 0.5 * (SCREEN_WIDTH - PANE_TITLE_WIDTH);
+    public static double TITLE_WIDTH = PANE_TITLE_WIDTH;
+    public static double TITLE_TOP = 0;
+    public static double TITLE_LEFT = 0.5 * (SCREEN_WIDTH - TITLE_WIDTH);
+
+
 
     public static double PANE_NAME_LABEL_HGT;
     public static double PANE_NAME_LABEL_WIDTH = SCREEN_WIDTH - (2 * VIEW_BTN_WIDTH);
