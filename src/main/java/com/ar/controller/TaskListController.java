@@ -2,6 +2,7 @@ package com.ar.controller;
 
 import com.ar.config.CellFactory;
 import com.ar.config.ComponentSize;
+import com.ar.config.Dimensions;
 import com.ar.config.DisplayType;
 import com.ar.dto.PresetDto;
 import com.ar.dto.TaskDto;
@@ -20,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -34,8 +36,14 @@ import java.math.BigInteger;
 public class TaskListController {
 
     @FXML
-    private TableView<TaskDto> table = new TableView<>();
+    private AnchorPane paneViewBtn;
+    @FXML
+    private AnchorPane paneNameLabel;
+    @FXML
+    private AnchorPane paneTable;
 
+    @FXML
+    private TableView<TaskDto> table = new TableView<>();
     @FXML
     private Label presetName;
     @FXML
@@ -49,10 +57,7 @@ public class TaskListController {
 
     private PresetDto preset;
 
-    private final HostServices hostServices;
-
     private final PresetService presetService;
-    private final TaskService taskService;
     private final CurrentRecordViewService currentRecordViewService;
     private final ScreenController screenController;
     
@@ -62,40 +67,22 @@ public class TaskListController {
         back.setText("BACK");
         edit.setText("EDIT");
         clone.setText("CLONE");
-        ComponentUtils.setTaskListButtonDimensions(back);
-        ComponentUtils.setTaskListButtonDimensions(edit);
-        ComponentUtils.setTaskListButtonDimensions(clone);
+
         back.setOnAction(screenController::switchToPresetListView);
         edit.setOnAction(screenController::switchToPresetView);
         clone.setOnAction(event -> {
-            Preset newPreset = presetService.clonePreset(preset);
-            currentRecordViewService.updateRecord("TASKLIST", newPreset.getId());
+            currentRecordViewService.updateRecord("TASKLIST", presetService.clonePreset(preset).getId());
             screenController.switchToTaskListView(event);
         });
     }
 
-    private void setTitleInfo() {
-        presetName.relocate(0, ComponentSize.TASKLIST_TITLE_TOP);
-        presetName.setMinWidth(ComponentSize.SCREEN_WIDTH);
-        presetName.setFont(new Font(ComponentSize.TASKLIST_TITLE_SIZE));
-        presetName.setAlignment(Pos.CENTER);
+    private void setLabelInfo() {
+        duration.setText(TimeUtils.convertSecondsToTime(preset.getDuration()));
         presetName.setText(preset.getName());
     }
 
-    private void setDurationInfo() {
-        duration.relocate(0, ComponentSize.TASKLIST_DURATION_TOP);
-        duration.setMinWidth(ComponentSize.SCREEN_WIDTH);
-        duration.setFont(new Font(ComponentSize.TASKLIST_DURATION_SIZE));
-        duration.setAlignment(Pos.CENTER);
-        duration.setText(TimeUtils.convertSecondsToTime(preset.getDuration()));
-    }
-
-    public void generateTaskList() {
-        table.relocate(0, ComponentSize.TASKLIST_TABLE_TOP);
-        table.setTranslateX(ComponentSize.TABLE_MARGIN);
-        table.setMaxWidth(ComponentSize.TABLE_WIDTH);
-        table.setMinWidth(ComponentSize.TABLE_WIDTH);
-        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    private void generateTaskList() {
+        ComponentUtils.setTableDimensions(table, Dimensions.TABLE);
         final TableColumn c1 = new TableColumn("Name");
         final TableColumn c2 = new TableColumn("Duration");
         c2.setMaxWidth(ComponentSize.COL_OTHER_WIDTH);
@@ -104,7 +91,6 @@ public class TaskListController {
         c1.setCellValueFactory(new PropertyValueFactory<>("name"));
         c2.setCellValueFactory(new PropertyValueFactory<>(""));
 
-
         c1.setCellFactory(cellFactory.taskButton());
         c2.setCellFactory(cellFactory.durationText());
 
@@ -112,13 +98,28 @@ public class TaskListController {
         table.setItems(TaskUtils.formatList(preset.getTaskList(), DisplayType.ADD));
     }
 
+    private void setComponentDimensions() {
+        ComponentUtils.setPaneDimensions(paneTable, Dimensions.PANE_TABLE);
+        ComponentUtils.setPaneDimensions(paneNameLabel, Dimensions.PANE_NAME_LABEL);
+        ComponentUtils.setPaneDimensions(paneViewBtn, Dimensions.PANE_VIEW_BTN);
+
+        ComponentUtils.setTableDimensions(table, Dimensions.TABLE);
+
+        ComponentUtils.setLabelDimensions(duration, Dimensions.DURATION_LABEL);
+        ComponentUtils.setLabelDimensions(presetName, Dimensions.NAME_LABEL);
+
+        ComponentUtils.setButtonDimensions(back, Dimensions.BACK_BTN);
+        ComponentUtils.setButtonDimensions(edit, Dimensions.EDIT_BTN);
+        ComponentUtils.setButtonDimensions(clone, Dimensions.CLONE_BTN);
+    }
+
     @FXML
     public void initialize() {
         presetName.setText("Task List View");
-        final var presetId = currentRecordViewService.getTaskListRecordId();
+        final BigInteger presetId = currentRecordViewService.getTaskListRecordId();
         preset = presetService.getPreset(presetId);
-        setTitleInfo();
-        setDurationInfo();
+        setComponentDimensions();
+        setLabelInfo();
         setButtonInfo();
         generateTaskList();
     }

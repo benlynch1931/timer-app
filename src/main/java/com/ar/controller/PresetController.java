@@ -23,6 +23,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.math.BigInteger;
+
 /**
  * @author Ben Lynch
  */
@@ -59,14 +61,10 @@ public class PresetController {
     private final CellFactory cellFactory;
 
     public void generateTaskList() {
-        table.relocate(0, ComponentSize.LIST_TABLE_TOP);
-        table.setTranslateX(ComponentSize.TABLE_MARGIN);
-        table.setMaxWidth(ComponentSize.TABLE_WIDTH);
-        table.setMinWidth(ComponentSize.TABLE_WIDTH);
-        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        final TableColumn c1 = new TableColumn("Name");
-        final TableColumn c2 = new TableColumn("Duration");
-        final TableColumn c3 = new TableColumn("");
+        ComponentUtils.setTableDimensions(table);
+        final var c1 = new TableColumn("Name");
+        final var c2 = new TableColumn("Duration");
+        final var c3 = new TableColumn("");
         c2.setMaxWidth(ComponentSize.COL_OTHER_WIDTH);
         c2.setMinWidth(ComponentSize.COL_OTHER_WIDTH);
         c3.setMaxWidth(ComponentSize.COL_DELETE_WIDTH);
@@ -115,7 +113,7 @@ public class PresetController {
         ComponentUtils.setTaskButtonDimensions(save);
         ComponentUtils.setTaskButtonDimensions(back);
         save.setOnAction(event -> {
-            var nameValid = NameValidator.validateName(presetName.getText());
+            boolean nameValid = NameValidator.validateName(presetName.getText());
             if (nameValid) {
                 updatePresetInfo();
                 presetService.saveOrUpdateTask(preset);
@@ -131,16 +129,16 @@ public class PresetController {
     private void setContainerMeasures() {
         ComponentUtils.setTaskContainerSize(buttonBox);
         ComponentUtils.setTaskContainerSize(nameBox, ComponentSize.TASK_NAME_BOX_HGT);
-        ComponentUtils.setTaskContainerSize(taskListBox, ComponentSize.TASK_DURATION_PANE_HGT);
+//        ComponentUtils.setTaskContainerSize(taskListBox, ComponentSize.TASK_DURATION_PANE_HGT);
 
         buttonBox.relocate(0, ComponentSize.PRESET_BUTTON_BOX_TOP);
         nameBox.relocate(0, ComponentSize.PRESET_NAME_BOX_TOP);
-        taskListBox.relocate(0, ComponentSize.PRESET_TASKLIST_BOX_TOP);
+//        taskListBox.relocate(0, ComponentSize.PRESET_TASKLIST_BOX_TOP);
     }
 
     @FXML
     public void initialize() {
-        var presetId = currentRecordViewService.getTaskListRecordId();
+        BigInteger presetId = currentRecordViewService.getTaskListRecordId();
         preset = presetService.getPreset(presetId);
         setContainerMeasures();
         setPresetInfo();
