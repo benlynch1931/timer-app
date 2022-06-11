@@ -2,6 +2,7 @@ package com.ar.controller;
 
 import com.ar.config.CellFactory;
 import com.ar.config.ComponentSize;
+import com.ar.config.Dimensions;
 import com.ar.config.DisplayType;
 import com.ar.dto.PresetDto;
 import com.ar.dto.TaskDto;
@@ -33,35 +34,31 @@ import java.math.BigInteger;
 public class PresetController {
 
     @FXML
-    private TableView<TaskDto> table = new TableView<>();
-
-    @FXML
     private AnchorPane paneViewBtn;
     @FXML
     private AnchorPane paneTable;
     @FXML
     private AnchorPane paneNameField;
+
     @FXML
-    private TextField presetName;
+    private TableView<TaskDto> table = new TableView<>();
     @FXML
     private Button save;
     @FXML
     private Button back;
     @FXML
+    private TextField presetName;
+    @FXML
     private Label nameError;
 
-    @Getter
     private PresetDto preset;
-
-    private final HostServices hostServices;
-
     private final PresetService presetService;
     private final CurrentRecordViewService currentRecordViewService;
     private final ScreenController screenController;
     private final CellFactory cellFactory;
 
     public void generateTaskList() {
-        ComponentUtils.setTableDimensions(table);
+
         final var c1 = new TableColumn("Name");
         final var c2 = new TableColumn("Duration");
         final var c3 = new TableColumn("");
@@ -84,12 +81,22 @@ public class PresetController {
         table.setItems(TaskUtils.formatList(preset.getTaskList(), DisplayType.DELETE));
     }
 
-    private void setErrorLabel(final Label label, final double topMargin) {
+    private void setComponentDimensions() {
+        ComponentUtils.setPaneDimensions(paneTable, Dimensions.PANE_TABLE);
+        ComponentUtils.setPaneDimensions(paneNameField, Dimensions.PANE_NAME_FIELD);
+        ComponentUtils.setPaneDimensions(paneViewBtn, Dimensions.PANE_VIEW_BTN);
+
+        ComponentUtils.setTableDimensions(table, Dimensions.TABLE);
+
+        ComponentUtils.setTextFieldDimensions(presetName, Dimensions.NAME_FIELD);
+        ComponentUtils.setLabelDimensions(nameError, Dimensions.NAME_ERROR);
+
+        ComponentUtils.setButtonDimensions(back, Dimensions.BACK_BTN);
+        ComponentUtils.setButtonDimensions(save, Dimensions.SAVE_BTN);
+    }
+
+    private void setErrorLabelColour(final Label label) {
         label.setTextFill(Paint.valueOf("#FF0000"));
-        label.setFont(new Font(ComponentSize.TASK_ERROR_SIZE));
-        label.setAlignment(Pos.CENTER);
-        label.setMinWidth(ComponentSize.SCREEN_WIDTH);
-        label.relocate(0, topMargin);
     }
 
     private void setPresetInfo() {
@@ -110,8 +117,6 @@ public class PresetController {
     private void setButtonInfo() {
         save.setText("SAVE");
         back.setText("BACK");
-        ComponentUtils.setTaskButtonDimensions(save);
-        ComponentUtils.setTaskButtonDimensions(back);
         save.setOnAction(event -> {
             boolean nameValid = NameValidator.validateName(presetName.getText());
             if (nameValid) {
@@ -126,25 +131,15 @@ public class PresetController {
         back.setOnAction(screenController::switchToTaskListView);
     }
 
-    private void setContainerMeasures() {
-        ComponentUtils.setTaskContainerSize(paneViewBtn);
-        ComponentUtils.setTaskContainerSize(paneNameField, ComponentSize.TASK_NAME_BOX_HGT);
-//        ComponentUtils.setTaskContainerSize(paneTable, ComponentSize.TASK_DURATION_PANE_HGT);
-
-        paneViewBtn.relocate(0, ComponentSize.PRESET_BUTTON_BOX_TOP);
-        paneNameField.relocate(0, ComponentSize.PRESET_NAME_BOX_TOP);
-//        paneTable.relocate(0, ComponentSize.PRESET_TASKLIST_BOX_TOP);
-    }
 
     @FXML
     public void initialize() {
         BigInteger presetId = currentRecordViewService.getTaskListRecordId();
         preset = presetService.getPreset(presetId);
-        setContainerMeasures();
+        setComponentDimensions();
         setPresetInfo();
         setButtonInfo();
-        setErrorLabel(nameError, ComponentSize.TASK_NAME_ERROR_TOP);
-        ComponentUtils.setTaskNameComponentDimensions(presetName);
+        setErrorLabelColour(nameError);
     }
 }
 
