@@ -2,7 +2,10 @@ package com.ar.utils;
 
 import com.ar.entity.ActiveTask;
 import com.ar.repository.ActiveTaskRepo;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
+import java.io.File;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -60,6 +63,9 @@ public class PresetUtils {
      */
     public static void startAlarm(String taskName) {
         System.out.println(taskName + "Alarm ringing");
+        Media sound = new Media(new File("src/main/resources/alarm_one.mp3").toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
     }
 
 }

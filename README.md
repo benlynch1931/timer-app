@@ -26,3 +26,9 @@ This means you don't have to set them yourself or work out the timings - this is
 The integration for SpringBoot and JavaFx was done with the help of SpringDeveloper on YouTube. Find the video I used [here](https://www.youtube.com/watch?v=lPy9mc_O_gU&t=578s&ab_channel=SpringDeveloper)
 
 The ScreenController Scene switching was achieved using a video by Bro Code on YouTube. Find the video I used [here](https://www.youtube.com/watch?v=hcM-R-YOKkQ&ab_channel=BroCode)
+
+
+Alarm Notification Sounds:
+
+-> Music from <a href="https://pixabay.com/music/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=35089">Pixabay</a>
+-> Music from <a href="https://pixabay.com/music/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=6402">Pixabay</a>

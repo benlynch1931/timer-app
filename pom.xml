@@ -62,6 +62,12 @@
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-media</artifactId>
+			<version>19-ea+8</version>
+		</dependency>
 	</dependencies>
 
 	<build>
