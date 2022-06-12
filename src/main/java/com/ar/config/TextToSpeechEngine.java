@@ -1,15 +1,20 @@
 package com.ar.config;
 
+import org.springframework.stereotype.Component;
+
 import javax.speech.Central;
 import javax.speech.synthesis.Synthesizer;
 import javax.speech.synthesis.SynthesizerModeDesc;
 import java.util.Locale;
 
+@Component
 public class TextToSpeechEngine {
 
-    public static void speak(String strToSpeak) {
+    private Synthesizer synthesizer;
+
+    public TextToSpeechEngine() {
         try {
-            // Set property as Kevin Dictionary
+
             System.setProperty(
                     "freetts.voices",
                     "com.sun.speech.freetts.en.us"
@@ -21,7 +26,7 @@ public class TextToSpeechEngine {
                             + ".jsapi.FreeTTSEngineCentral");
 
             // Create a Synthesizer
-            Synthesizer synthesizer
+            synthesizer
                     = Central.createSynthesizer(
                     new SynthesizerModeDesc(Locale.US));
 
@@ -30,6 +35,15 @@ public class TextToSpeechEngine {
 
             // Resume Synthesizer
             synthesizer.resume();
+        } catch (Exception e) {
+            System.out.println("Error with speech");
+        }
+    }
+
+    public void speak(String strToSpeak) {
+        try {
+            // Set property as Kevin Dictionary
+
 
             // Speaks the given text
             // until the queue is empty.
@@ -39,10 +53,8 @@ public class TextToSpeechEngine {
                     Synthesizer.QUEUE_EMPTY);
 
             // Deallocate the Synthesizer.
-            synthesizer.deallocate();
-        }
-
-        catch (Exception e) {
+//            synthesizer.deallocate();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

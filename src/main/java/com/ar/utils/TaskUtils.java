@@ -8,6 +8,7 @@ import com.ar.repository.ActiveTaskRepo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -46,6 +47,7 @@ public class TaskUtils {
      */
     public static boolean createActiveTasks(ActiveTaskRepo activeTaskRepo, List<TaskDto> taskList, PresetDto preset) {
         List<ActiveTask> savedList = new ArrayList<>();
+        taskList.add(new TaskDto(null, preset.getId(), "Food is Ready", BigInteger.ZERO));
         taskList.forEach(task -> {
             long delay = preset.getDuration().subtract(task.getDuration()).longValue();
             LocalDateTime alarmTime = LocalDateTime.now().plus(delay, ChronoUnit.SECONDS);

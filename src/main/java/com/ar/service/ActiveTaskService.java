@@ -22,6 +22,8 @@ public class ActiveTaskService {
 
     private final ActiveTaskRepo activeTaskRepo;
 
+    private final TextToSpeechEngine textToSpeechEngine;
+
 
     /**
      * Checks if task alarm should go off
@@ -44,11 +46,10 @@ public class ActiveTaskService {
     }
 
     private void activateAlarm(final ActiveTask activeTask) {
-        Media sound = new Media(new File("src/main/resources/alarm_one.mp3").toURI().toString());
+        Media sound = new Media(new File("src/main/resources/alarmOneShort.m4a").toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
-        TextToSpeechEngine.speak(activeTask.getName());
+        textToSpeechEngine.speak(activeTask.getName());
         mediaPlayer.play();
-        TextToSpeechEngine.speak(activeTask.getName());
     }
 
 }
