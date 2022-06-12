@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.math.BigInteger;
+import java.util.List;
 
 /**
  * @author Ben Lynch
@@ -23,4 +24,8 @@ public interface PresetRepo extends JpaRepository<Preset, BigInteger> {
     @Transactional
     @Query("SELECT p FROM Preset p WHERE p.id=:presetId")
     Preset getById(BigInteger presetId);
+
+    @Transactional
+    @Query("SELECT p FROM Preset p ORDER BY p.name ASC")
+    List<Preset> getAllPresetInOrder();
 }

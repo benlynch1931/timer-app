@@ -53,7 +53,7 @@ public class PresetService {
     }
 
     public ObservableList<PresetDto> getPresetListForDisplay() {
-        return formatList(presetRepo.findAll());
+        return formatList(presetRepo.getAllPresetInOrder());
     }
 
     /**
