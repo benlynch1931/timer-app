@@ -60,7 +60,6 @@ public class ComponentSize {
     public static final double TABLE_HGT = PANE_TABLE_HGT;
 
     public static final double VIEW_BTN_WIDTH = ComponentUtils.twentyPct(SCREEN_WIDTH);
-    public static final double NAME_ERROR_WIDTH = SCREEN_WIDTH;
     public static final double PANE_DURATION_WIDTH = SCREEN_WIDTH;
     public static final double TIME_ERROR_WIDTH = PANE_DURATION_WIDTH;
     public static final double HOURS_FIELD_HGT = DURATION_FIELD_HGT;
@@ -88,6 +87,7 @@ public class ComponentSize {
      */
     public static final double COL_OTHER_WIDTH = (TABLE_WIDTH - COL_PRESET_WIDTH) / 2;
     public static final double NAME_FIELD_WIDTH = PANE_NAME_FIELD_WIDTH;
+    public static final double NAME_ERROR_WIDTH = PANE_NAME_FIELD_WIDTH;
 
     public static final double PANE_VIEW_BTN_HGT = VIEW_BTN_HGT * 2;
     public static final double PANE_NAME_FIELD_HGT = NAME_FIELD_HGT + NAME_ERROR_TEXT_SIZE + NAME_FIELD_SPACER;
@@ -110,12 +110,12 @@ public class ComponentSize {
 
     public static final double VIEW_BTN_COL_2_LEFT = SCREEN_WIDTH - VIEW_BTN_WIDTH;
     public static final double NAME_FIELD_LEFT = 0.5 * (PANE_NAME_FIELD_WIDTH - NAME_FIELD_WIDTH);
+    public static final double NAME_ERROR_LEFT = 0.5 * (PANE_NAME_FIELD_WIDTH - NAME_ERROR_WIDTH);
     public static final double MINUTES_FIELD_LEFT = HOURS_FIELD_LEFT + DURATION_FIELD_WIDTH + DURATION_FIELD_SPACER;
     public static final double SECONDS_FIELD_LEFT = MINUTES_FIELD_LEFT + DURATION_FIELD_WIDTH + DURATION_FIELD_SPACER;
 
     public static final double TITLE_LEFT = 0.5 * (SCREEN_WIDTH - TITLE_WIDTH);
 
-    public static final double NAME_ERROR_LEFT = 0.5 * (SCREEN_WIDTH - NAME_ERROR_WIDTH);
     public static final double TIME_ERROR_LEFT = SCREEN_WIDTH - TIME_ERROR_WIDTH;
 
 }
