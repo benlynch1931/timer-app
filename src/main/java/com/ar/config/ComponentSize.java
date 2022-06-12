@@ -53,7 +53,6 @@ public class ComponentSize {
      * Direct-Mapping Constants
      */
     public static final double PANE_TABLE_WIDTH = SCREEN_WIDTH;
-    public static final double PANE_NAME_FIELD_WIDTH = SCREEN_WIDTH;
     public static final double TABLE_WIDTH = PANE_TABLE_WIDTH;
     public static final double PANE_VIEW_BTN_WIDTH = SCREEN_WIDTH;
 
@@ -77,6 +76,7 @@ public class ComponentSize {
     public static final double PANE_TITLE_WIDTH = SCREEN_WIDTH;
     public static final double TITLE_WIDTH = PANE_TITLE_WIDTH;
 
+    public static final double PANE_NAME_FIELD_WIDTH = SCREEN_WIDTH - (2 * VIEW_BTN_WIDTH);
     public static final double PANE_NAME_LABEL_WIDTH = SCREEN_WIDTH - (2 * VIEW_BTN_WIDTH);
     public static final double NAME_WIDTH = PANE_NAME_LABEL_WIDTH;
     public static final double DURATION_WIDTH = PANE_NAME_LABEL_WIDTH;
@@ -87,7 +87,7 @@ public class ComponentSize {
      * Dynamic Constants
      */
     public static final double COL_OTHER_WIDTH = (TABLE_WIDTH - COL_PRESET_WIDTH) / 2;
-    public static final double NAME_FIELD_WIDTH = PANE_NAME_FIELD_WIDTH - (2 * VIEW_BTN_WIDTH);
+    public static final double NAME_FIELD_WIDTH = PANE_NAME_FIELD_WIDTH;
 
     public static final double PANE_VIEW_BTN_HGT = VIEW_BTN_HGT * 2;
     public static final double PANE_NAME_FIELD_HGT = NAME_FIELD_HGT + NAME_ERROR_TEXT_SIZE + NAME_FIELD_SPACER;

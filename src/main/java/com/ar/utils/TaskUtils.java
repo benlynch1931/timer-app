@@ -12,22 +12,16 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TimerTask;
 
 /**
  * @author Ben Lynch
  */
 public class TaskUtils {
 
+    /**
+     * Hides implicit constructor
+     */
     private TaskUtils() {}
-
-    public static TimerTask task = new TimerTask() {
-        @Override
-        public void run() {
-            System.out.println("Task Done");
-            cancel();
-        }
-    };
 
     /**
      * Formats list to be compatible with JavaFX

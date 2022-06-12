@@ -37,35 +37,7 @@ public class PresetUtils {
         return timeToFormat.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
-    /**
-     * Checks if task alarm should go off
-     * @param activeTaskRepo repository of ActiveTask table
-     * @param activePresetId presetId of active tasks to check
-     */
-    public static boolean checkTaskStatus(ActiveTaskRepo activeTaskRepo, BigInteger activePresetId) {
-        List<ActiveTask> presetActiveTasks = activeTaskRepo.getByPresetId(activePresetId);
-        if (presetActiveTasks.isEmpty()) {
-            return true;
-        } else {
-            presetActiveTasks.forEach(task -> {
-            if (task.getAlarmTime().isBefore(LocalDateTime.now())) {
-                startAlarm(task.getName());
-                activeTaskRepo.delete(task);
-            }
-            });
-            return false;
-        }
-    }
 
-    /**
-     * Method that starts the task's alarm
-     * @param taskName name of task
-     */
-    public static void startAlarm(String taskName) {
-        System.out.println(taskName + "Alarm ringing");
-        Media sound = new Media(new File("src/main/resources/alarm_one.mp3").toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.play();
-    }
+
 
 }

@@ -1,10 +1,9 @@
 package com.ar.service;
 
+import com.ar.entity.ActiveTask;
 import com.ar.entity.CurrentRecordView;
 import com.ar.entity.Task;
-import com.ar.repository.CurrentRecordViewRepo;
-import com.ar.repository.PresetRepo;
-import com.ar.repository.TaskRepo;
+import com.ar.repository.*;
 import com.ar.utils.ObjectUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -23,7 +22,7 @@ public class CurrentRecordViewService {
 
     private final CurrentRecordViewRepo currentRecordViewRepo;
     private final TaskRepo taskRepo;
-    private final PresetRepo presetRepo;
+    private final ActiveTaskRepo activeTaskRepo;
 
     /**
      * Updates or created a record to store the record linked to a scene
@@ -61,5 +60,14 @@ public class CurrentRecordViewService {
             return newTask;
         }
         return taskRepo.getById(taskId);
+    }
+
+    public ActiveTask getAlarmRecord() {
+        BigInteger alarmId = currentRecordViewRepo.getRecordIdByScene("ALARM");
+        return activeTaskRepo.getById(alarmId);
+    }
+
+    public void removeRecord(final BigInteger id) {
+        activeTaskRepo.delete(activeTaskRepo.getById(id));
     }
 }

@@ -16,23 +16,7 @@ import org.springframework.stereotype.Component;
 public class TaskService {
     // TODO: Stop preset -> clear active timers
 
-    private final PresetRepo presetRepo;
-
     private final TaskRepo taskRepo;
-
-    private final ApplicationContext applicationContext;
-
-//    public TaskService(PresetRepo presetRepo, ActiveTaskRepo activeTaskRepo, ApplicationContext applicationContext) {
-//        this.presetRepo = presetRepo;
-//        this.activeTaskRepo = activeTaskRepo;
-//        this.applicationContext = applicationContext;
-//    }
-
-
-
-//    public ObservableList<TaskDto> getTaskList(CurrentRecordViewService currentRecordViewService) {
-//
-//    }
 
     /**
      * Gets and converts Task to DTO for display purposes

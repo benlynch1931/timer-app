@@ -7,11 +7,10 @@ import com.ar.entity.Task;
 import com.ar.mapper.PresetMapper;
 import com.ar.repository.ActiveTaskRepo;
 import com.ar.repository.PresetRepo;
-import com.ar.utils.PresetUtils;
 import com.ar.utils.TaskUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.springframework.context.ApplicationContext;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
@@ -21,6 +20,7 @@ import java.util.*;
  * @author Ben Lynch
  */
 @Component
+@RequiredArgsConstructor
 public class PresetService {
     // TODO: Stop preset -> clear active timers
 
@@ -28,13 +28,8 @@ public class PresetService {
 
     private final ActiveTaskRepo activeTaskRepo;
 
-    private final ApplicationContext applicationContext;
+    private final ActiveTaskService alarmService;
 
-    public PresetService(PresetRepo presetRepo, ActiveTaskRepo activeTaskRepo, ApplicationContext applicationContext) {
-        this.presetRepo = presetRepo;
-        this.activeTaskRepo = activeTaskRepo;
-        this.applicationContext = applicationContext;
-    }
 
     public PresetDto getPreset(BigInteger presetId) {
         if (Objects.equals(presetId, BigInteger.ZERO)) {
@@ -88,25 +83,13 @@ public class PresetService {
         presetTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                boolean allTasksFinished = PresetUtils.checkTaskStatus(activeTaskRepo, activePresetId);
+                boolean allTasksFinished = alarmService.checkTaskStatus(activePresetId);
                 if(allTasksFinished) {
                     cancel();
                 };
             }
         }, 1_000, 1_000);
     }
-
-//
-//    public void removeTask(int presetIdx , Task taskToRemove) {
-//        presetList.get(presetIdx).getTaskList().remove(taskToRemove);
-//        updateDuration(presetList.get(presetIdx), taskToRemove.getDuration(), UpdateType.SUBTRACT);
-//        savePreset(presetList.get(presetIdx));
-//    }
-//
-//    public void editPresetName(int presetIdx, String name) {
-//        presetList.get(presetIdx).setName(name);
-//        savePreset(presetList.get(presetIdx));
-//    }
 
     /**
      * Method to update preset with its new duration time, being the max duration of a task in the preset
@@ -135,9 +118,6 @@ public class PresetService {
         return taskList.get(0).getDuration();
     }
 
-    public void savePreset(Preset presetToUpdate) {
-        presetRepo.save(presetToUpdate);
-    }
 
     public void saveOrUpdateTask(final PresetDto preset) {
         presetRepo.save(PresetMapper.mapToEntity(preset));

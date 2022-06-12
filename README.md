@@ -27,6 +27,7 @@ The integration for SpringBoot and JavaFx was done with the help of SpringDevelo
 
 The ScreenController Scene switching was achieved using a video by Bro Code on YouTube. Find the video I used [here](https://www.youtube.com/watch?v=hcM-R-YOKkQ&ab_channel=BroCode)
 
+The TextToSpeech Engine was achieved using a blog on GeeksforGeeks. Found [here](https://www.geeksforgeeks.org/converting-text-speech-java/)
 
 Alarm Notification Sounds:
 
