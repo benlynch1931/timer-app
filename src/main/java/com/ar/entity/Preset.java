@@ -23,6 +23,7 @@ public class Preset {
         this.name = name;
         this.duration = duration;
         this.taskList = taskList;
+        this.delay = BigInteger.ZERO;
     }
 
     @Id
@@ -35,6 +36,9 @@ public class Preset {
 
     @Column(name = DatabaseConstants.COLUMN_DURATION)
     private BigInteger duration;
+
+    @Column(name = DatabaseConstants.COLUMN_DELAY)
+    private BigInteger delay;
 
     @JoinColumn(name = DatabaseConstants.COLUMN_PRESET_ID)
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

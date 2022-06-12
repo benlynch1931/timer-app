@@ -16,6 +16,7 @@ public class DatabaseConstants {
     public static final String COLUMN_TASK_ID = "TASK_ID";
     public static final String COLUMN_NAME = "NAME";
     public static final String COLUMN_DURATION = "DURATION";
+    public static final String COLUMN_DELAY = "DELAY";
 
 
     public static final String COLUMN_ACTIVE_TASK_ID = "ACTIVE_TASK_ID";

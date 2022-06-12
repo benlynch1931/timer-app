@@ -22,6 +22,10 @@ public enum Dimensions {
             ComponentSize.PANE_NAME_FIELD_LEFT, ComponentSize.PANE_NAME_FIELD_TOP, 0,
             ComponentSize.PANE_NAME_FIELD_WIDTH, ComponentSize.PANE_NAME_FIELD_HGT
     ),
+    PANE_DELAY_FIELD(
+            ComponentSize.PANE_DELAY_FIELD_LEFT, ComponentSize.PANE_DELAY_FIELD_TOP, 0,
+            ComponentSize.PANE_DELAY_FIELD_WIDTH, ComponentSize.PANE_DELAY_FIELD_HGT
+    ),
     PANE_DURATION_FIELD(
             ComponentSize.PANE_DURATION_LEFT, ComponentSize.PANE_DURATION_TOP, 0,
             ComponentSize.PANE_DURATION_WIDTH, ComponentSize.PANE_DURATION_HGT
@@ -42,6 +46,18 @@ public enum Dimensions {
     NAME_FIELD(
             ComponentSize.NAME_FIELD_LEFT, ComponentSize.NAME_FIELD_TOP, 0,
             ComponentSize.NAME_FIELD_WIDTH, ComponentSize.NAME_FIELD_HGT
+    ),
+    DELAY_FIELD(
+            ComponentSize.DELAY_FIELD_LEFT, ComponentSize.DELAY_FIELD_TOP, 0,
+            ComponentSize.DELAY_FIELD_WIDTH, ComponentSize.DELAY_FIELD_HGT
+    ),
+    DELAY_LABEL(
+            ComponentSize.DELAY_LABEL_LEFT, ComponentSize.DELAY_LABEL_TOP, 0,
+            ComponentSize.DELAY_LABEL_WIDTH, ComponentSize.DELAY_LABEL_TEXT_SIZE
+    ),
+    SECONDS_LABEL(
+            ComponentSize.SECONDS_LABEL_LEFT, ComponentSize.SECONDS_LABEL_TOP, 0,
+            ComponentSize.SECONDS_LABEL_WIDTH, ComponentSize.SECONDS_LABEL_TEXT_SIZE
     ),
     NAME_ERROR(
             ComponentSize.NAME_ERROR_LEFT, ComponentSize.NAME_ERROR_TOP, 0,

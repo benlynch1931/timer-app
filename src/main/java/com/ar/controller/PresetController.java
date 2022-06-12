@@ -35,6 +35,8 @@ public class PresetController {
     private AnchorPane paneTable;
     @FXML
     private AnchorPane paneNameField;
+    @FXML
+    private AnchorPane paneDelayField;
 
     @FXML
     private TableView<TaskDto> table = new TableView<>();
@@ -46,6 +48,12 @@ public class PresetController {
     private TextField presetName;
     @FXML
     private Label nameError;
+    @FXML
+    private TextField delay;
+    @FXML
+    private Label delayLabel;
+    @FXML
+    private Label secondsLabel;
 
     private PresetDto preset;
     private final PresetService presetService;
@@ -80,12 +88,17 @@ public class PresetController {
     private void setComponentDimensions() {
         ComponentUtils.setPaneDimensions(paneTable, Dimensions.PANE_TABLE);
         ComponentUtils.setPaneDimensions(paneNameField, Dimensions.PANE_NAME_FIELD);
+        ComponentUtils.setPaneDimensions(paneDelayField, Dimensions.PANE_DELAY_FIELD);
         ComponentUtils.setPaneDimensions(paneViewBtn, Dimensions.PANE_VIEW_BTN);
 
         ComponentUtils.setTableDimensions(table, Dimensions.TABLE);
 
         ComponentUtils.setTextFieldDimensions(presetName, Dimensions.NAME_FIELD);
         ComponentUtils.setLabelDimensions(nameError, Dimensions.NAME_ERROR);
+
+        ComponentUtils.setTextFieldDimensions(delay, Dimensions.DELAY_FIELD);
+        ComponentUtils.setLabelDimensions(delayLabel, Dimensions.DELAY_LABEL);
+        ComponentUtils.setLabelDimensions(secondsLabel, Dimensions.SECONDS_LABEL);
 
         ComponentUtils.setButtonDimensions(back, Dimensions.BACK_BTN);
         ComponentUtils.setButtonDimensions(save, Dimensions.SAVE_BTN);
@@ -97,6 +110,9 @@ public class PresetController {
 
     private void setPresetInfo() {
         presetName.setPromptText("Preset Name");
+        delay.setText(preset.getDelay().toString());
+        delayLabel.setText("Delay: ");
+        secondsLabel.setText("Seconds");
         if (ObjectUtils.isNotNull(preset.getName())) {
             presetName.setText(preset.getName());
         } else {
@@ -107,7 +123,13 @@ public class PresetController {
 
     private void updatePresetInfo() {
         preset.setName(presetName.getText());
-        preset.setDuration(presetService.getPresetNewDuration(preset.getTaskList()));
+        try {
+            long delayLong = Long.parseLong(delay.getText());
+            preset.setDelay(BigInteger.valueOf(delayLong));
+        } catch(Exception e) {
+            preset.setDelay(BigInteger.ZERO);
+        }
+        preset.setDuration(presetService.getPresetNewDuration(preset));
     }
 
     private void setButtonInfo() {

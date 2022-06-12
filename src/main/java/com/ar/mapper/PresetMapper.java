@@ -26,6 +26,7 @@ public class PresetMapper {
         presetDto.setId(preset.getId());
         presetDto.setName(preset.getName());
         presetDto.setDuration(preset.getDuration());
+        presetDto.setDelay(preset.getDelay());
 
         if (ObjectUtils.isNotNull(preset.getDuration())) {
             if (Objects.equals(preset.getDuration(), BigInteger.ZERO)) {
@@ -51,6 +52,7 @@ public class PresetMapper {
         preset.setId(presetDto.getId());
         preset.setName(presetDto.getName());
         preset.setDuration(presetDto.getDuration());
+        preset.setDelay(presetDto.getDelay());
         preset.setTaskList(TaskMapper.mapToEntity(presetDto.getTaskList()));
         return preset;
     }

@@ -99,23 +99,23 @@ public class PresetService {
         final Preset preset = presetRepo.getById(presetId);
         final List<Task> taskList = preset.getTaskList();
         taskList.sort((o1, o2) -> o2.getDuration().subtract(o1.getDuration()).intValue());
-        preset.setDuration(taskList.get(0).getDuration());
+        preset.setDuration(taskList.get(0).getDuration().add(preset.getDelay()));
         presetRepo.save(preset);
     }
 
     /**
      * Method to update preset with its new duration time, being the max duration of a task in the preset
-     * @param taskList list of task to get max duration from
+     * @param presetDto preset containing list of tasks to get max duration AND delay from
      * @return duration of preset
      */
-    public BigInteger getPresetNewDuration(final List<TaskDto> taskList) {
-        if (taskList.isEmpty()) {
+    public BigInteger getPresetNewDuration(final PresetDto presetDto) {
+        if (presetDto.getTaskList().isEmpty()) {
             return BigInteger.ZERO;
         }
-        if (taskList.size() > 1) {
-            taskList.sort((o1, o2) -> o2.getDuration().subtract(o1.getDuration()).intValue());
+        if (presetDto.getTaskList().size() > 1) {
+            presetDto.getTaskList().sort((o1, o2) -> o2.getDuration().subtract(o1.getDuration()).intValue());
         }
-        return taskList.get(0).getDuration();
+        return presetDto.getTaskList().get(0).getDuration().add(presetDto.getDelay());
     }
 
 

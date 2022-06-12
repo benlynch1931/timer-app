@@ -14,6 +14,12 @@
                 <Label fx:id="nameError" />
         </AnchorPane>
 
+        <AnchorPane fx:id="paneDelayField">
+                <Label fx:id="delayLabel" />
+                <TextField fx:id="delay" />
+                <Label fx:id="secondsLabel" />
+        </AnchorPane>
+
         <AnchorPane fx:id="paneTable">
                 <TableView fx:id="table" />
         </AnchorPane>

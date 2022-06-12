@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Ben Lynch
@@ -47,7 +48,11 @@ public class TaskUtils {
      */
     public static boolean createActiveTasks(ActiveTaskRepo activeTaskRepo, List<TaskDto> taskList, PresetDto preset) {
         List<ActiveTask> savedList = new ArrayList<>();
-        taskList.add(new TaskDto(null, preset.getId(), "Food is Ready", BigInteger.ZERO));
+        if (Objects.equals(preset.getDelay(), BigInteger.ZERO)) {
+            taskList.set(0, new TaskDto(null, preset.getId(), "Food is Ready", BigInteger.ZERO));
+        } else {
+            taskList.add(new TaskDto(null, preset.getId(), "Food is Ready", BigInteger.ZERO));
+        }
         taskList.forEach(task -> {
             long delay = preset.getDuration().subtract(task.getDuration()).longValue();
             LocalDateTime alarmTime = LocalDateTime.now().plus(delay, ChronoUnit.SECONDS);

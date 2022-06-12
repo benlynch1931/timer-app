@@ -53,7 +53,7 @@ public class TextToSpeechEngine {
                     Synthesizer.QUEUE_EMPTY);
 
             // Deallocate the Synthesizer.
-//            synthesizer.deallocate();
+            synthesizer.deallocate();
         } catch (Exception e) {
             e.printStackTrace();
         }

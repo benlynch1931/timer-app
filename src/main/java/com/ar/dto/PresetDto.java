@@ -25,5 +25,7 @@ public class PresetDto {
 
     private BigInteger duration;
 
+    private BigInteger delay;
+
     private List<TaskDto> taskList;
 }
