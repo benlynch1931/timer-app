@@ -2,6 +2,7 @@ package com.ar.repository;
 
 import com.ar.entity.ActiveTask;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +15,11 @@ import java.util.List;
  */
 @Repository
 public interface ActiveTaskRepo extends JpaRepository<ActiveTask, BigInteger> {
+
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM ActiveTask t WHERE t.presetId=:presetId")
+    void deleteByPresetId(BigInteger presetId);
 
     @Transactional
     @Query("SELECT t FROM ActiveTask t WHERE t.presetId=:presetId")

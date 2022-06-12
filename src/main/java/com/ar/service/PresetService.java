@@ -70,7 +70,7 @@ public class PresetService {
     }
 
     public void cancelActiveTaskTimers(PresetDto preset) {
-        presetRepo.deleteByPresetId(preset.getId());
+        activeTaskRepo.deleteByPresetId(preset.getId());
     }
 
 
@@ -129,5 +129,9 @@ public class PresetService {
         preset.setId(null);
         preset.getTaskList().forEach(task -> task.setId(null));
         return presetRepo.save(preset);
+    }
+
+    public void deletePreset(PresetDto currentPreset) {
+        presetRepo.delete(PresetMapper.mapToEntity(currentPreset));
     }
 }

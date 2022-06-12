@@ -49,6 +49,8 @@ public class TaskListController {
     private Button edit;
     @FXML
     private Button clone;
+    @FXML
+    private Button delete;
 
     private PresetDto preset;
 
@@ -62,12 +64,17 @@ public class TaskListController {
         back.setText("BACK");
         edit.setText("EDIT");
         clone.setText("CLONE");
+        delete.setText("DEL");
 
         back.setOnAction(screenController::switchToPresetListView);
         edit.setOnAction(screenController::switchToPresetView);
         clone.setOnAction(event -> {
             currentRecordViewService.updateRecord("TASKLIST", presetService.clonePreset(preset).getId());
             screenController.switchToTaskListView(event);
+        });
+        delete.setOnAction(event -> {
+            presetService.deletePreset(preset);
+            screenController.switchToPresetListView(event);
         });
     }
 
@@ -106,6 +113,7 @@ public class TaskListController {
         ComponentUtils.setButtonDimensions(back, Dimensions.BACK_BTN);
         ComponentUtils.setButtonDimensions(edit, Dimensions.EDIT_BTN);
         ComponentUtils.setButtonDimensions(clone, Dimensions.CLONE_BTN);
+        ComponentUtils.setButtonDimensions(delete, Dimensions.DELETE_BTN);
     }
 
     @FXML

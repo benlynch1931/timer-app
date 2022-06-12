@@ -74,7 +74,7 @@ public class ButtonUtils {
             taskService.deleteTask(currentTask);
             screenController.switchToPresetView(event);
         });
-        deleteButton.setText("TEST");
+//        deleteButton.setText("TEST");
         return deleteButton;
     }
 

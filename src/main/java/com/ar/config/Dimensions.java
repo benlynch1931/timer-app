@@ -73,6 +73,10 @@ public enum Dimensions {
             ComponentSize.VIEW_BTN_WIDTH, ComponentSize.VIEW_BTN_HGT
     ),
     CLONE_BTN(
+            ComponentSize.VIEW_BTN_COL_1_LEFT, ComponentSize.VIEW_BTN_ROW_2_TOP, -4,
+            ComponentSize.VIEW_BTN_WIDTH, ComponentSize.VIEW_BTN_HGT
+    ),
+    DELETE_BTN(
             ComponentSize.VIEW_BTN_COL_2_LEFT, ComponentSize.VIEW_BTN_ROW_2_TOP, -4,
             ComponentSize.VIEW_BTN_WIDTH, ComponentSize.VIEW_BTN_HGT
     ),

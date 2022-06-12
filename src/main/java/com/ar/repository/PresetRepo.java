@@ -2,11 +2,10 @@ package com.ar.repository;
 
 import com.ar.entity.Preset;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -15,11 +14,6 @@ import java.util.List;
  */
 @Repository
 public interface PresetRepo extends JpaRepository<Preset, BigInteger> {
-
-    @Modifying
-    @Transactional
-    @Query("DELETE FROM ActiveTask t WHERE t.presetId=:presetId")
-    void deleteByPresetId(BigInteger presetId);
 
     @Transactional
     @Query("SELECT p FROM Preset p WHERE p.id=:presetId")

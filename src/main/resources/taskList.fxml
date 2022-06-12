@@ -8,6 +8,7 @@
                 <Button fx:id="back" />
                 <Button fx:id="edit" />
                 <Button fx:id="clone" />
+                <Button fx:id="delete" />
         </AnchorPane>
 
         <AnchorPane fx:id="paneNameLabel">
