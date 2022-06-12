@@ -103,7 +103,7 @@ public class CellFactory {
                 setText(null);
                 if (!empty) {
                     TaskDto currentTask = getTableView().getItems().get(getIndex());
-                    setGraphic(ButtonUtils.generateDeleteTaskButton(currentTask, taskService));
+                    setGraphic(ButtonUtils.generateDeleteTaskButton(currentTask, taskService, screenController));
                 }
             }
         };

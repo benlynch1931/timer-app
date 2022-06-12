@@ -67,10 +67,13 @@ public class ButtonUtils {
         return taskButton;
     }
 
-    public static Button generateDeleteTaskButton(final TaskDto currentTask, final TaskService taskService) {
+    public static Button generateDeleteTaskButton(final TaskDto currentTask, final TaskService taskService, final ScreenController screenController) {
         final Button deleteButton = new Button();
         deleteButton.setMinWidth(ComponentSize.COL_DELETE_WIDTH - 10);
-        deleteButton.setOnAction(event -> taskService.deleteTask(currentTask));
+        deleteButton.setOnAction(event -> {
+            taskService.deleteTask(currentTask);
+            screenController.switchToPresetView(event);
+        });
         deleteButton.setText("TEST");
         return deleteButton;
     }
