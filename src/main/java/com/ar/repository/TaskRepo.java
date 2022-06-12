@@ -16,7 +16,7 @@ import java.util.List;
 public interface TaskRepo extends JpaRepository<Task, BigInteger> {
 
     @Transactional
-    @Query("SELECT t FROM Task t WHERE t.presetId=:presetId")
+    @Query("SELECT t FROM Task t WHERE t.presetId=:presetId ORDER BY t.duration DESC")
     List<Task> getByPresetId(BigInteger presetId);
 
     @Transactional
