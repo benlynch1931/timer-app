@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <AnchorPane xmlns="http://javafx.com/javafx/0.0.121"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.ar.controller.PresetListController">
+            fx:controller="com.bl.controller.PresetListController">
 
         <AnchorPane fx:id="paneTitleLabel">
         <Label fx:id="title" />
